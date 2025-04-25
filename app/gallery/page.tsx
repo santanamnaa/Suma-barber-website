@@ -10,68 +10,68 @@ export default function GalleryPage() {
   
   const gallery = [
     {
-      url: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80",
-      caption: "Classic Fade Cut"
+      url: "/images/galery/galery-1.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1622288432450-277d0fef5ed6?auto=format&fit=crop&q=80",
-      caption: "Modern Pompadour"
+      url: "/images/galery/galery-2.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80",
-      caption: "Textured Crop"
+      url: "/images/galery/galery-3.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1593702295094-ac9a262f7c36?auto=format&fit=crop&q=80",
-      caption: "Clean Fade"
+      url: "/images/galery/galery-4.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80",
-      caption: "Slick Back Style"
+      url: "/images/galery/galery-5.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&q=80",
-      caption: "Korean Two-Block"
+      url: "/images/galery/galery-6.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&q=80",
-      caption: "Beard Trim"
+      url: "/images/galery/galery-7.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80",
-      caption: "Classic Gentleman Cut"
+      url: "/images/galery/galery-8.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1634302086738-b13113181ccd?auto=format&fit=crop&q=80",
-      caption: "Modern Quiff"
+      url: "/images/galery/galery-9.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1596728325488-58c87691e9af?auto=format&fit=crop&q=80",
-      caption: "Textured Messy"
+      url: "/images/galery/galery-10.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1592647420148-bfcc177e2117?auto=format&fit=crop&q=80",
-      caption: "Skin Fade"
+      url: "/images/galery/galery-11.jpg",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1580518337843-f959e992563b?auto=format&fit=crop&q=80",
-      caption: "Asian Style"
+      url: "/images/places/geger-1.PNG",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?auto=format&fit=crop&q=80",
-      caption: "Vintage Cut"
+      url: "/images/places/geger-2.PNG",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&q=80",
-      caption: "Modern Undercut"
+      url: "/images/places/geger-3.PNG",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80",
-      caption: "Classic Scissor Cut"
+      url: "/images/places/kiara-1.PNG",
+      caption: ""
     },
     {
-      url: "https://images.unsplash.com/photo-1584486483122-af7d49cf2992?auto=format&fit=crop&q=80",
-      caption: "Premium Styling"
+      url: "/images/places/kiara-2.PNG",
+      caption: ""
     }
   ]
 

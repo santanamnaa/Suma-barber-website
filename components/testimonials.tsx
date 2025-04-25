@@ -7,24 +7,36 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
 const testimonials = [
-  {
-    name: "Alex Thompson",
-    role: "Regular Client",
-    image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&auto=format&fit=crop",
-    content: "The attention to detail and precision in every cut is remarkable. Best barbershop experience I've ever had!"
-  },
-  {
-    name: "James Wilson",
-    role: "Style Enthusiast",
-    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&auto=format&fit=crop",
-    content: "Their expertise in Korean style cuts is unmatched. They truly understand modern trends and deliver exactly what you want."
-  },
-  {
-    name: "Michael Chen",
-    role: "Fashion Blogger",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&auto=format&fit=crop",
-    content: "The blend of UK and Korean barbering techniques creates unique styles you can't find anywhere else."
-  }
+    {
+      name: "Maliki Somma",
+      role: "",
+      image: "/images/testimonials/maliki-somma.jpg",
+      content: "Potongan rambutnya detail dan presisi sekali. Pengalaman barbershop terbaik yang pernah saya rasakan!"
+    },
+    {
+      name: "Kevin Faulky",
+      role: "",
+      image: "/images/testimonials/kevin-faulky.jpeg",
+      content: "Ahli dalam gaya potongan Korea—mereka paham tren masa kini dan hasilnya selalu memuaskan sekali."
+    },
+    {
+      name: "Nadhif Herdian",
+      role: "",
+      image: "/images/testimonials/nadhif-herdian.jpg",
+      content: "Perpaduan teknik barbering UK dan Korea menciptakan gaya unik yang sulit ditemukan di tempat lain."
+    },
+    {
+      name: "Rayhan Aldi",
+      role: "",
+      image: "/images/testimonials/rayhan-aldi.jpeg",
+      content: "Layanan ramah dan suasana santainya bikin nyaman. Potongan rambut selalu sesuai ekspektasi!"
+    },
+    {
+      name: "Santana Mena",
+      role: "",
+      image: "/images/testimonials/santana-mena.jpeg",
+      content: "Capster-nya profesional dan hasilnya rapi. Saya selalu puas setiap kali berkunjung ke Suma Barber."
+    }  
 ]
 
 export function Testimonials() {

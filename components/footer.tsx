@@ -1,5 +1,7 @@
 import Link from "next/link"
-import { Instagram, BookOpen as TiktokIcon } from "lucide-react"
+import { Instagram } from "lucide-react"
+import { SiTiktok } from 'react-icons/si'
+
 
 export function Footer() {
   return (
@@ -35,10 +37,27 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold">Contact</h3>
             <ul className="mt-4 space-y-2 text-sm">
-              <li className="text-muted-foreground">123 Barber Street</li>
-              <li className="text-muted-foreground">City, State 12345</li>
-              <li className="text-muted-foreground">Phone: (555) 123-4567</li>
-              <li className="text-muted-foreground">Email: info@sumabarber.com</li>
+            <li className="text-muted-foreground">
+              Phone:{' '}
+              <a
+                href="https://wa.me/6287725241193"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                +62 877 2524 1193
+              </a>
+            </li>
+            <li className="text-muted-foreground">
+              Email:{' '}
+              <a
+                href="mailto:sumabarber@gmail.com"
+                className="text-blue-600 hover:underline"
+              >
+                sumabarber@gmail.com
+              </a>
+            </li>
+
             </ul>
           </div>
           <div>
@@ -48,7 +67,7 @@ export function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a href="https://tiktok.com/@sumaofficial_" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-                <TiktokIcon className="h-5 w-5" />
+                <SiTiktok className="h-5 w-5" />
               </a>
             </div>
           </div>
