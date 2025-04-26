@@ -180,7 +180,7 @@ export default function ServicesPage() {
   useEffect(() => {
     async function fetchLocationServices() {
       if (!selectedLocation) return
-
+  
       const { data, error } = await supabase
         .from('location_services')
         .select(`
@@ -189,42 +189,43 @@ export default function ServicesPage() {
           service_id,
           price,
           duration,
-          service:services (
+          service:services!service_id (
             name,
             description
           )
         `)
         .eq('location_id', selectedLocation)
-
+  
       if (error) {
         toast.error('Failed to load services')
         return
       }
-
+  
       setLocationServices(data || [])
     }
-
+  
     async function fetchLocationSeats() {
       if (!selectedLocation) return
-
+  
       const { data: seats, error } = await supabase
         .from('seats')
         .select('*')
         .eq('location_id', selectedLocation)
         .eq('is_active', true)
         .order('name')
-
+  
       if (error) {
         toast.error('Failed to load seats')
         return
       }
-
+  
       setLocationSeats(seats || [])
     }
-
+  
     fetchLocationServices()
     fetchLocationSeats()
   }, [selectedLocation])
+  
 
   useEffect(() => {
     async function fetchAvailability() {
