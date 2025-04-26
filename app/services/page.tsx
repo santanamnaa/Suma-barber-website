@@ -201,7 +201,12 @@ export default function ServicesPage() {
         return
       }
   
-      setLocationServices(data || [])
+      setLocationServices(
+        (data || []).map((item) => ({
+          ...item,
+          service: Array.isArray(item.service) ? item.service[0] : item.service,
+        }))
+      )
     }
   
     async function fetchLocationSeats() {
@@ -225,6 +230,7 @@ export default function ServicesPage() {
     fetchLocationServices()
     fetchLocationSeats()
   }, [selectedLocation])
+  
   
 
   useEffect(() => {
