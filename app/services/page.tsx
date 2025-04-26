@@ -202,13 +202,16 @@ export default function ServicesPage() {
       }
     
       if (data) {
+        // FIX the returned data properly before setting state
         const fixedData = data.map((item: any) => ({
           ...item,
           service: Array.isArray(item.service) ? item.service[0] : item.service,
-        }))
+        })) as LocationService[]  // <-- add this cast!
+    
         setLocationServices(fixedData)
       }
     }
+    
     
   
     async function fetchLocationSeats() {
