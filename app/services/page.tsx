@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { format, addMinutes, parse } from "date-fns"
-import { Calendar as CalendarIcon, Clock, CheckCircle2, Scissors, Sparkles, Droplet, Palette, QrCode, CreditCard, Wallet, Loader2 } from "lucide-react"
+import { Calendar as CalendarIcon, Clock, CheckCircle2, Scissors, Sparkles, Palette } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { supabase } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
@@ -44,29 +44,9 @@ import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 
 const BASE_TIME_SLOTS = [
-  "10:00", "11:00", "12:00", "13:00", "14:00",
-  "15:00", "16:00", "17:00", "18:00", "19:00"
-]
-
-const PAYMENT_METHODS = [
-  { 
-    id: 'qris', 
-    name: 'QRIS', 
-    icon: <QrCode className="h-5 w-5" />,
-    description: 'Pay using any QRIS-compatible e-wallet'
-  },
-  { 
-    id: 'bca', 
-    name: 'Virtual BCA', 
-    icon: <CreditCard className="h-5 w-5" />,
-    description: 'Get virtual account number for bank transfer'
-  },
-  { 
-    id: 'gopay', 
-    name: 'GoPay', 
-    icon: <Wallet className="h-5 w-5" />,
-    description: 'Pay directly with your GoPay balance'
-  }
+  "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", 
+  "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", 
+  "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"
 ]
 
 const SERVICES_CONFIG = [
@@ -74,34 +54,38 @@ const SERVICES_CONFIG = [
     category: "Haircuts",
     icon: <Scissors className="h-5 w-5" />,
     items: [
-      { name: "Gentleman's Cut", description: "Classic grooming experience" },
-      { name: "Gentleman's Cut (Capster by Request)", description: "Premium cut with your preferred stylist" },
-      { name: "Gentleman's Cut + 30 Min Full Back Massage", description: "Relaxing combination of cut and massage" },
-      { name: "Gentleman's Cut + Bekam Kering", description: "Traditional therapy with modern styling" },
-      { name: "Gentleman's Cut + Ear Candle", description: "Therapeutic ear treatment with styling" },
-      { name: "Gentleman's Cut (Long Trim)", description: "Specialized long hair trimming" }
+      { name: "Gentleman's Cut", description: "Pengalaman grooming klasik untuk pria" },
+      { name: "Gentleman's Cut (Capster by Request)", description: "Potongan premium dengan capster pilihan Anda" },
+      { name: "Gentleman's Cut + 30 Min Full Back Massage", description: "Kombinasi potong rambut dan pijat punggung 30 menit" },
+      { name: "Gentleman's Cut + Bekam Kering", description: "Perawatan bekam kering dengan gaya modern" },
+      { name: "Gentleman's Cut + Ear Candle", description: "Perawatan lilin telinga untuk kenyamanan ekstra" },
+      { name: "Gentleman's Cut (Long Trim)", description: "Pemangkasan khusus untuk rambut panjang" },
+      { name: "Premium Gentleman's Cut", description: "Potong rambut, shampoo, hair wash, hair mask, handuk hangat, dan styling" },
+      { name: "Premium Gentleman's Cut (Long trim)", description: "Pemangkasan premium untuk rambut panjang" },
+      { name: "Creambath", description: "Perawatan deep conditioning untuk rambut" }
     ]
   },
   {
     category: "Styling",
     icon: <Sparkles className="h-5 w-5" />,
     items: [
-      { name: "Perm + Gentleman's Cut", description: "Classic perm with precision cut" },
-      { name: "Korean Perm + Gentleman's Cut", description: "K-style perm treatment" },
-      { name: "Down Perm", description: "Subtle, natural-looking waves" }
+      { name: "Perm + Gentleman's Cut", description: "Perm klasik dipadukan dengan potongan presisi" },
+      { name: "Korean Perm + Gentleman's Cut", description: "Perawatan perm bergaya Korea" },
+      { name: "Down Perm", description: "Gelombang rambut alami yang halus dan rapi" }
     ]
   },
   {
     category: "Coloring",
     icon: <Palette className="h-5 w-5" />,
     items: [
-      { name: "Full Hair Coloring", description: "Complete color transformation" },
-      { name: "Full Hair Bleach", description: "Professional lightening service" },
-      { name: "Highlight", description: "Dimensional color accents" },
-      { name: "Polish (Semir)", description: "Quick color refresh" }
+      { name: "Full Hair Coloring", description: "Transformasi warna rambut secara menyeluruh" },
+      { name: "Full Hair Bleach", description: "Proses bleaching rambut profesional" },
+      { name: "Highlight", description: "Aksen warna untuk memberikan dimensi pada rambut" },
+      { name: "Polish (Semir)", description: "Penyegaran warna rambut secara cepat" }
     ]
   }
 ]
+
 
 const formSchema = z.object({
   location: z.string({
@@ -122,9 +106,6 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  payment_method: z.string({
-    required_error: "Please select a payment method",
-  }),
   terms_accepted: z.boolean().refine(val => val === true, {
     message: "You must accept the terms and conditions",
   }),
@@ -148,13 +129,6 @@ interface TimeSlot {
   availableSeats: string[]
 }
 
-interface PaymentDetails {
-  qr_code?: string
-  virtual_account?: string
-  deeplink?: string
-  expires_at: string
-}
-
 export default function ServicesPage() {
   const [locations, setLocations] = useState<any[]>([])
   const [locationServices, setLocationServices] = useState<LocationService[]>([])
@@ -162,12 +136,8 @@ export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState<LocationService | null>(null)
   const [loading, setLoading] = useState(true)
   const [availableTimeSlots, setAvailableTimeSlots] = useState<TimeSlot[]>([])
-  const [showPaymentDialog, setShowPaymentDialog] = useState(false)
-  const [showPaymentDetails, setShowPaymentDetails] = useState(false)
-  const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
-  const [paymentProcessing, setPaymentProcessing] = useState(false)
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>('')
   const [locationSeats, setLocationSeats] = useState<any[]>([])
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -181,7 +151,6 @@ export default function ServicesPage() {
       time: '',
       seat: '',
       date: undefined,
-      payment_method: '',
       terms_accepted: false,
     }
   })
@@ -270,9 +239,8 @@ export default function ServicesPage() {
 
       const { data: bookings, error } = await supabase
         .from('bookings')
-        .select('booking_time, seat_id')
+        .select('booking_time, seat_id, total_duration')
         .eq('booking_date', format(selectedDate, 'yyyy-MM-dd'))
-        .in('payment_status', ['completed', 'processing'])
 
       if (error) {
         toast.error('Failed to check availability')
@@ -281,25 +249,44 @@ export default function ServicesPage() {
 
       // Calculate available time slots and seats
       const slots = BASE_TIME_SLOTS.map(time => {
+        // Start time of current slot
         const slotStart = parse(time, 'HH:mm', selectedDate)
+        // End time based on the selected service duration
         const slotEnd = addMinutes(slotStart, selectedService.duration)
-
+        
         // Get bookings that overlap with this time slot
         const overlappingBookings = bookings?.filter(booking => {
-          const bookingStart = parse(booking.booking_time, 'HH:mm', selectedDate)
-          const bookingEnd = addMinutes(bookingStart, selectedService.duration)
+          const bookingTime = booking.booking_time
+          const bookingDuration = booking.total_duration || 60 // Default to 60 minutes if not specified
+          
+          const bookingStart = parse(bookingTime, 'HH:mm', selectedDate)
+          const bookingEnd = addMinutes(bookingStart, bookingDuration)
 
-          return (
+          // Check for any kind of overlap between slots
+          const hasOverlap = (
+            // Case 1: Slot starts during an existing booking
             (slotStart >= bookingStart && slotStart < bookingEnd) ||
+            // Case 2: Slot ends during an existing booking
             (slotEnd > bookingStart && slotEnd <= bookingEnd) ||
-            (slotStart <= bookingStart && slotEnd >= bookingEnd)
+            // Case 3: Slot completely contains an existing booking
+            (slotStart <= bookingStart && slotEnd >= bookingEnd) ||
+            // Case 4: Booking completely contains the slot
+            (bookingStart <= slotStart && bookingEnd >= slotEnd)
           )
+          
+          return hasOverlap
         })
 
-        // Get seats that are available for this time slot
-        const bookedSeatIds = overlappingBookings?.map(b => b.seat_id) || []
+        // Get seats that are booked for this time slot
+        const bookedSeatIds = new Set()
+        
+        overlappingBookings?.forEach(booking => {
+          bookedSeatIds.add(booking.seat_id)
+        })
+        
+        // Get available seats for this time slot
         const availableSeats = locationSeats
-          .filter(seat => !bookedSeatIds.includes(seat.id))
+          .filter(seat => !bookedSeatIds.has(seat.id))
           .map(seat => seat.id)
 
         return {
@@ -328,180 +315,116 @@ export default function ServicesPage() {
         toast.error("Please select a service")
         return
       }
-
+  
+      // Format the booking date
+      const formattedDate = format(values.date, 'yyyy-MM-dd')
+      const bookingTimeSlot = values.time
+      
+      // Show loading state
+      toast.loading("Processing your booking...", { id: "booking-process" })
+      
       // Double-check seat availability before submitting
       const { data: conflictingBookings, error: checkError } = await supabase
         .from('bookings')
-        .select('seat_id, booking_time')
-        .eq('booking_date', format(values.date, 'yyyy-MM-dd'))
+        .select('seat_id, booking_time, total_duration')
+        .eq('booking_date', formattedDate)
         .eq('seat_id', values.seat)
-        .in('payment_status', ['completed', 'processing'])
-
-      if (checkError) throw checkError
-
-      // Check for time slot conflicts
-      const bookingStart = parse(values.time, 'HH:mm', values.date)
+  
+      if (checkError) {
+        toast.error("Error checking seat availability", { id: "booking-process" })
+        throw checkError
+      }
+  
+      // Parse booking start and end times
+      const bookingStart = parse(bookingTimeSlot, 'HH:mm', values.date)
       const bookingEnd = addMinutes(bookingStart, selectedService.duration)
-
+  
+      // Check for time slot conflicts with the selected seat
       const hasConflict = conflictingBookings?.some(booking => {
         const existingStart = parse(booking.booking_time, 'HH:mm', values.date)
-        const existingEnd = addMinutes(existingStart, selectedService.duration)
-
+        const existingDuration = booking.total_duration || 60 // Default to 60 minutes if not specified
+        const existingEnd = addMinutes(existingStart, existingDuration)
+  
+        // Check all overlap cases
         return (
+          // Case 1: New booking starts during an existing booking
           (bookingStart >= existingStart && bookingStart < existingEnd) ||
+          // Case 2: New booking ends during an existing booking
           (bookingEnd > existingStart && bookingEnd <= existingEnd) ||
-          (bookingStart <= existingStart && bookingEnd >= existingEnd)
+          // Case 3: New booking completely contains an existing booking
+          (bookingStart <= existingStart && bookingEnd >= existingEnd) ||
+          // Case 4: Existing booking completely contains new booking
+          (existingStart <= bookingStart && existingEnd >= bookingEnd)
         )
       })
-
+  
       if (hasConflict) {
-        toast.error("This seat is no longer available. Please select another seat or time.")
+        toast.error("This seat is no longer available at the selected time. Please select another seat or time.", { id: "booking-process" })
         return
       }
-
-      setShowPaymentDialog(true)
-    } catch (error) {
-      toast.error("Failed to process booking. Please try again.")
-    }
-  }
-
-  async function processPayment(paymentMethod: string) {
-    try {
-      setPaymentProcessing(true)
-      setSelectedPaymentMethod(paymentMethod)
-      form.setValue('payment_method', paymentMethod)
-
-      const values = form.getValues()
-
-      // Create initial booking with pending status
+  
+      // Handle day boundary crossing (services that end after midnight)
+      let crossesDayBoundary = false
+      
+      // Check if the service ends on the next day
+      if (bookingEnd.getDate() > bookingStart.getDate() || 
+          bookingEnd.getMonth() > bookingStart.getMonth() || 
+          bookingEnd.getFullYear() > bookingStart.getFullYear()) {
+        
+        crossesDayBoundary = true
+        // Additional check for next day conflicts if needed in the future
+      }
+  
+      console.log("Creating booking...")
+      
+      // Create booking record
       const { data: booking, error: bookingError } = await supabase
         .from('bookings')
         .insert({
           customer_name: values.name,
           customer_email: values.email,
           customer_phone: values.phone,
-          booking_date: format(values.date, 'yyyy-MM-dd'),
-          booking_time: values.time,
+          booking_date: formattedDate,
+          booking_time: bookingTimeSlot,
           seat_id: values.seat,
-          total_duration: selectedService!.duration,
-          total_price: selectedService!.price,
-          payment_status: 'processing',
-          payment_method: paymentMethod,
-          payment_details: null,
-          terms_accepted: values.terms_accepted,
-          payment_expiry: format(addMinutes(new Date(), 15), "yyyy-MM-dd'T'HH:mm:ssXXX")
+          total_duration: selectedService.duration,
+          total_price: selectedService.price,
+          terms_accepted: values.terms_accepted
         })
         .select()
         .single()
-
-      if (bookingError) throw bookingError
-
+  
+      if (bookingError) {
+        console.error("Booking error:", bookingError)
+        toast.error("Failed to create booking", { id: "booking-process" })
+        throw bookingError
+      }
+  
       // Create booking service record
       const { error: serviceError } = await supabase
         .from('booking_services')
         .insert({
           booking_id: booking.id,
-          location_service_id: selectedService!.id
+          location_service_id: selectedService.id
         })
-
-      if (serviceError) throw serviceError
-
-      // Simulate payment gateway integration
-      const mockPaymentDetails: PaymentDetails = {
-        expires_at: format(addMinutes(new Date(), 15), "yyyy-MM-dd'T'HH:mm:ssXXX")
+  
+      if (serviceError) {
+        console.error("Service error:", serviceError)
+        toast.error("Failed to link service to booking", { id: "booking-process" })
+        throw serviceError
       }
-
-      switch (paymentMethod) {
-        case 'qris':
-          mockPaymentDetails.qr_code = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mockqrcode'
-          break
-        case 'bca':
-          mockPaymentDetails.virtual_account = '8277083398'
-          break
-        case 'gopay':
-          mockPaymentDetails.deeplink = 'gojek://gopay/payment'
-          break
-      }
-
-      // Update booking with payment details
-      const { error: updateError } = await supabase
-        .from('bookings')
-        .update({ 
-          payment_details: mockPaymentDetails,
-          payment_id: `PAY-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
-        })
-        .eq('id', booking.id)
-
-      if (updateError) throw updateError
-
-      setPaymentDetails(mockPaymentDetails)
-      setShowPaymentDetails(true)
-
-      // Simulate payment completion after 2 seconds
-      setTimeout(async () => {
-        const { error: completeError } = await supabase
-          .from('bookings')
-          .update({ payment_status: 'completed' })
-          .eq('id', booking.id)
-
-        if (completeError) {
-          toast.error("Payment verification failed")
-          return
-        }
-
-        setShowPaymentDialog(false)
-        setShowPaymentDetails(false)
-        handleSuccess()
-        toast.success("Payment successful! Booking confirmed.")
-      }, 2000)
-
+  
+      // Dismiss loading toast and show success
+      toast.success("Booking created successfully!", { id: "booking-process" })
+      console.log("Booking created successfully!")
+      setShowSuccessDialog(true)
+      handleSuccess()
+      
     } catch (error) {
-      toast.error("Payment failed. Please try again.")
-    } finally {
-      setPaymentProcessing(false)
+      console.error("Submission failed:", error)
+      toast.error("Failed to process booking. Please try again.", { id: "booking-process" })
     }
   }
-
-  function PaymentDetailsContent({ method, details }: { method: string, details: PaymentDetails }) {
-    switch (method) {
-      case 'qris':
-        return (
-          <div className="text-center">
-            <img src={details.qr_code} alt="QRIS Code" className="mx-auto mb-4" />
-            <p className="text-sm text-muted-foreground">
-              Scan this QR code using any QRIS-compatible e-wallet
-            </p>
-          </div>
-        )
-      case 'bca':
-        return (
-          <div className="text-center">
-            <p className="text-2xl font-mono mb-2">{details.virtual_account}</p>
-            <p className="text-sm text-muted-foreground">
-              Transfer to this Virtual Account number before it expires
-            </p>
-          </div>
-        )
-      case 'gopay':
-        return (
-          <div className="text-center">
-            <Button
-              onClick={() => window.open(details.deeplink, '_blank')}
-              className="mb-4 bg-[#00AA13] hover:bg-[#00AA13]/90 transition-colors"
-            >
-              Open GoPay App
-            </Button>
-            <p className="text-sm text-muted-foreground">
-              Click the button above to open GoPay and complete your payment
-            </p>
-          </div>
-        )
-      default:
-        return null
-    }
-  }
-
-  const isKiaraArthaLocation = locations.find(loc => loc.id === selectedLocation)?.name === 'KIARA ARTHA'
 
   return (
     <div className="min-h-screen pt-24 pb-12">
@@ -570,314 +493,264 @@ export default function ServicesPage() {
 
             {selectedLocation && (
               <>
-                {isKiaraArthaLocation ? (
-                  <div className="text-center py-12">
-                    <h2 className="text-2xl font-bold mb-4">Coming Soon!</h2>
-                    <p className="text-muted-foreground">
-                      Our Kiara Artha location is currently under construction. 
-                      Please check back later or visit our other locations.
-                    </p>
-                  </div>
-                ) : (
-                  <>
-                    {/* Services Categories */}
-                    <div className="space-y-8">
-                      {SERVICES_CONFIG.map((category) => (
-                        <div key={category.category}>
-                          <div className="flex items-center gap-2 mb-4">
-                            {category.icon}
-                            <h2 className="text-xl font-semibold">{category.category}</h2>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {category.items.map((serviceConfig) => {
-                              const locationService = locationServices.find(
-                                ls => ls.service.name === serviceConfig.name
-                              )
-                              
-                              if (!locationService) return null
+                {/* Services Categories */}
+                <div className="space-y-8">
+                  {SERVICES_CONFIG.map((category) => (
+                    <div key={category.category}>
+                      <div className="flex items-center gap-2 mb-4">
+                        {category.icon}
+                        <h2 className="text-xl font-semibold">{category.category}</h2>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {category.items.map((serviceConfig) => {
+                          const locationService = locationServices.find(
+                            ls => ls.service.name === serviceConfig.name
+                          )
+                          
+                          if (!locationService) return null
 
-                              return (
-                                <Card
-                                  key={locationService.id}
-                                  className={cn(
-                                    "p-4 cursor-pointer transition-all duration-300",
-                                    selectedService?.id === locationService.id 
-                                      ? "ring-2 ring-primary bg-primary/5 transform scale-[1.02]" 
-                                      : "hover:bg-accent/5 hover:shadow-lg hover:scale-[1.01]"
-                                  )}
-                                  onClick={() => {
-                                    setSelectedService(locationService)
-                                    form.setValue("service", locationService.id)
-                                    form.setValue("time", "")
-                                    form.setValue("seat", "")
-                                  }}
+                          return (
+                            <Card
+                              key={locationService.id}
+                              className={cn(
+                                "p-4 cursor-pointer transition-all duration-300",
+                                selectedService?.id === locationService.id 
+                                  ? "ring-2 ring-primary bg-primary/5 transform scale-[1.02]" 
+                                  : "hover:bg-accent/5 hover:shadow-lg hover:scale-[1.01]"
+                              )}
+                              onClick={() => {
+                                setSelectedService(locationService)
+                                form.setValue("service", locationService.id)
+                                form.setValue("time", "")
+                                form.setValue("seat", "")
+                              }}
+                            >
+                              <div className="flex justify-between items-start mb-2">
+                                <h3 className="font-medium">{serviceConfig.name}</h3>
+                                <Badge 
+                                  variant={selectedService?.id === locationService.id ? "default" : "outline"}
+                                  className="transition-colors"
                                 >
-                                  <div className="flex justify-between items-start mb-2">
-                                    <h3 className="font-medium">{serviceConfig.name}</h3>
-                                    <Badge 
-                                      variant={selectedService?.id === locationService.id ? "default" : "outline"}
-                                      className="transition-colors"
-                                    >
-                                      {(locationService.price / 1000)}K
-                                    </Badge>
-                                  </div>
-                                  <p className="text-sm text-muted-foreground mb-2">{serviceConfig.description}</p>
-                                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                                    <Clock className="h-4 w-4" />
-                                    <span>{locationService.duration} mins</span>
-                                  </div>
-                                </Card>
-                              )
-                            })}
-                          </div>
-                        </div>
-                      ))}
+                                  {(locationService.price / 1000)}K
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-muted-foreground mb-2">{serviceConfig.description}</p>
+                              <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                <Clock className="h-4 w-4" />
+                                <span>{locationService.duration} mins</span>
+                              </div>
+                            </Card>
+                          )
+                        })}
+                      </div>
                     </div>
+                  ))}
+                </div>
 
-                    {/* Booking Form */}
-                    {selectedService && (
-                      <div className="max-w-xl mx-auto mt-12">
-                        <Card className="p-8 shadow-lg">
-                          <h2 className="text-2xl font-semibold mb-6">Complete Your Booking</h2>
-                          <div className="space-y-6">
-                            <div className="grid grid-cols-2 gap-4">
-                              <FormField
-                                control={form.control}
-                                name="date"
-                                render={({ field }) => (
-                                  <FormItem className="flex flex-col">
-                                    <FormLabel>Date</FormLabel>
-                                    <Popover>
-                                      <PopoverTrigger asChild>
-                                        <FormControl>
-                                          <Button
-                                            variant={"outline"}
-                                            className={cn(
-                                              "w-full pl-3 text-left font-normal h-12 transition-all",
-                                              "hover:ring-2 hover:ring-primary/20",
-                                              "focus:ring-2 focus:ring-primary",
-                                              !field.value && "text-muted-foreground"
-                                            )}
-                                          >
-                                            {field.value ? (
-                                              format(field.value, "PPP")
-                                            ) : (
-                                              <span>Pick a date</span>
-                                            )}
-                                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                          </Button>
-                                        </FormControl>
-                                      </PopoverTrigger>
-                                      <PopoverContent className="w-auto p-0" align="start">
-                                        <Calendar
-                                          mode="single"
-                                          selected={field.value}
-                                          onSelect={(date) => {
-                                            field.onChange(date)
-                                            form.setValue('time', '')
-                                            form.setValue('seat', '')
-                                          }}
-                                          disabled={(date) =>
-                                            date < new Date() || date < new Date("1900-01-01")
-                                          }
-                                          initialFocus
-                                          className="rounded-md border"
-                                        />
-                                      </PopoverContent>
-                                    </Popover>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-
-                              <FormField
-                                control={form.control}
-                                name="time"
-                                render={({ field }) => (
-                                  <FormItem>
-                                    <FormLabel>Time</FormLabel>
-                                    <Select 
-                                      onValueChange={(value) => {
-                                        field.onChange(value)
+                {/* Booking Form */}
+                {selectedService && (
+                  <div className="max-w-xl mx-auto mt-12">
+                    <Card className="p-8 shadow-lg">
+                      <h2 className="text-2xl font-semibold mb-6">Complete Your Booking</h2>
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-2 gap-4">
+                          <FormField
+                            control={form.control}
+                            name="date"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-col">
+                                <FormLabel>Date</FormLabel>
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <FormControl>
+                                      <Button
+                                        variant={"outline"}
+                                        className={cn(
+                                          "w-full pl-3 text-left font-normal h-12 transition-all",
+                                          "hover:ring-2 hover:ring-primary/20",
+                                          "focus:ring-2 focus:ring-primary",
+                                          !field.value && "text-muted-foreground"
+                                        )}
+                                      >
+                                        {field.value ? (
+                                          format(field.value, "PPP")
+                                        ) : (
+                                          <span>Pick a date</span>
+                                        )}
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      </Button>
+                                    </FormControl>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-auto p-0" align="start">
+                                    <Calendar
+                                      mode="single"
+                                      selected={field.value}
+                                      onSelect={(date) => {
+                                        field.onChange(date)
+                                        form.setValue('time', '')
                                         form.setValue('seat', '')
                                       }}
-                                      value={field.value}
-                                      disabled={!selectedDate}
-                                    >
-                                      <FormControl>
-                                        <SelectTrigger 
-                                          className={cn(
-                                            "h-12 transition-all",
-                                            "hover:ring-2 hover:ring-primary/20",
-                                            "focus:ring-2 focus:ring-primary"
-                                          )}
-                                        >
-                                          <SelectValue placeholder="Select time" />
-                                        </SelectTrigger>
-                                      </FormControl>
-                                      <SelectContent>
-                                        {availableTimeSlots.map((slot) => (
-                                          <SelectItem
-                                            key={slot.time}
-                                            value={slot.time}
-                                            disabled={!slot.available}
-                                            className={cn(
-                                              "flex items-center justify-between transition-colors",
-                                              !slot.available ? "opacity-50" : "hover:bg-primary/5"
-                                            )}
-                                          >
-                                            <span>{slot.time}</span>
-                                            {!slot.available && (
-                                              <Badge variant="destructive" className="ml-2">
-                                                Booked
-                                              </Badge>
-                                            )}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-                            </div>
-
-                            {selectedTime && (
-                              <FormField
-                                control={form.control}
-                                name="seat"
-                                render={({ field }) => (
-                                  <FormItem>
-                                    <FormLabel>Select Seat (Cap)</FormLabel>
-                                    <Select
-                                      onValueChange={field.onChange}
-                                      value={field.value}
-                                    >
-                                      <FormControl>
-                                        <SelectTrigger
-                                          className={cn(
-                                            "h-12 transition-all",
-                                            "hover:ring-2 hover:ring-primary/20",
-                                            "focus:ring-2 focus:ring-primary"
-                                          )}
-                                        >
-                                          <SelectValue placeholder="Choose a seat" />
-                                        </SelectTrigger>
-                                      </FormControl>
-                                      <SelectContent>
-                                        {locationSeats.map((seat) => {
-                                          const timeSlot = availableTimeSlots.find(
-                                            slot => slot.time === selectedTime
-                                          )
-                                          const isAvailable = timeSlot?.availableSeats.includes(seat.id)
-
-                                          return (
-                                            <SelectItem
-                                              key={seat.id}
-                                              value={seat.id}
-                                              disabled={!isAvailable}
-                                              className={cn(
-                                                "flex items-center justify-between transition-colors",
-                                                !isAvailable ? "opacity-50" : "hover:bg-primary/5"
-                                              )}
-                                            >
-                                              <span>{seat.name}</span>
-                                              {!isAvailable && (
-                                                <Badge variant="destructive" className="ml-2">
-                                                  Booked
-                                                </Badge>
-                                              )}
-                                            </SelectItem>
-                                          )
-                                        })}
-                                      </SelectContent>
-                                    </Select>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
+                                      disabled={(date) =>
+                                        date < new Date() || date < new Date("1900-01-01")
+                                      }
+                                      initialFocus
+                                      className="rounded-md border"
+                                    />
+                                  </PopoverContent>
+                                </Popover>
+                                <FormMessage />
+                              </FormItem>
                             )}
+                          />
 
-                            <div className="space-y-4">
-                              <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                  <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                      <Input 
-                                        placeholder="John Doe" 
-                                        {...field} 
+                          <FormField
+                            control={form.control}
+                            name="time"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Time</FormLabel>
+                                <Select 
+                                  onValueChange={(value) => {
+                                    field.onChange(value)
+                                    form.setValue('seat', '')
+                                  }}
+                                  value={field.value}
+                                  disabled={!selectedDate}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger 
+                                      className={cn(
+                                        "h-12 transition-all",
+                                        "hover:ring-2 hover:ring-primary/20",
+                                        "focus:ring-2 focus:ring-primary"
+                                      )}
+                                    >
+                                      <SelectValue placeholder="Select time" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    {availableTimeSlots.map((slot) => (
+                                      <SelectItem
+                                        key={slot.time}
+                                        value={slot.time}
+                                        disabled={!slot.available}
                                         className={cn(
-                                          "h-12 transition-all",
-                                          "hover:ring-2 hover:ring-primary/20",
-                                          "focus:ring-2 focus:ring-primary"
+                                          "flex items-center justify-between transition-colors",
+                                          !slot.available ? "opacity-50" : "hover:bg-primary/5"
                                         )}
-                                      />
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
+                                      >
+                                        <span>{slot.time}</span>
+                                        {!slot.available && (
+                                          <Badge variant="destructive" className="ml-2">
+                                            Booked
+                                          </Badge>
+                                        )}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
 
-                              <div className="grid grid-cols-2 gap-4">
-                                <FormField
-                                  control={form.control}
-                                  name="email"
-                                  render={({ field }) => (
-                                    <FormItem>
-                                      <FormLabel>Email</FormLabel>
-                                      <FormControl>
-                                        <Input 
-                                          type="email" 
-                                          placeholder="john@example.com" 
-                                          {...field}
+                        {selectedTime && (
+                          <FormField
+                            control={form.control}
+                            name="seat"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Select Seat (Cap)</FormLabel>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger
+                                      className={cn(
+                                        "h-12 transition-all",
+                                        "hover:ring-2 hover:ring-primary/20",
+                                        "focus:ring-2 focus:ring-primary"
+                                      )}
+                                    >
+                                      <SelectValue placeholder="Choose a seat" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    {locationSeats.map((seat) => {
+                                      const timeSlot = availableTimeSlots.find(
+                                        slot => slot.time === selectedTime
+                                      )
+                                      const isAvailable = timeSlot?.availableSeats.includes(seat.id)
+
+                                      return (
+                                        <SelectItem
+                                          key={seat.id}
+                                          value={seat.id}
+                                          disabled={!isAvailable}
                                           className={cn(
-                                            "h-12 transition-all",
-                                            "hover:ring-2 hover:ring-primary/20",
-                                            "focus:ring-2 focus:ring-primary"
+                                            "flex items-center justify-between transition-colors",
+                                            !isAvailable ? "opacity-50" : "hover:bg-primary/5"
                                           )}
-                                        />
-                                      </FormControl>
-                                      <FormMessage />
-                                    </FormItem>
-                                  )}
-                                />
-
-                                <FormField
-                                  control={form.control}
-                                  name="phone"
-                                  render={({ field }) => (
-                                    <FormItem>
-                                      <FormLabel>Phone</FormLabel>
-                                      <FormControl>
-                                        <Input 
-                                          type="tel" 
-                                          placeholder="+1234567890" 
-                                          {...field}
-                                          className={cn(
-                                            "h-12 transition-all",
-                                            "hover:ring-2 hover:ring-primary/20",
-                                            "focus:ring-2 focus:ring-primary"
+                                        >
+                                          <span>{seat.name}</span>
+                                          {!isAvailable && (
+                                            <Badge variant="destructive" className="ml-2">
+                                              Booked
+                                            </Badge>
                                           )}
-                                        />
-                                      </FormControl>
-                                      <FormMessage />
-                                    </FormItem>
-                                  )}
-                                />
-                              </div>
-                            </div>
+                                        </SelectItem>
+                                      )
+                                    })}
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        )}
 
+                        <div className="space-y-4">
+                          <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                  <Input 
+                                    placeholder="John Doe" 
+                                    {...field} 
+                                    className={cn(
+                                      "h-12 transition-all",
+                                      "hover:ring-2 hover:ring-primary/20",
+                                      "focus:ring-2 focus:ring-primary"
+                                    )}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <div className="grid grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
-                              name="terms_accepted"
+                              name="email"
                               render={({ field }) => (
                                 <FormItem>
+                                  <FormLabel>Email</FormLabel>
                                   <FormControl>
-                                    <BookingTerms
-                                      onAccept={(accepted) => field.onChange(accepted)}
+                                    <Input 
+                                      type="email" 
+                                      placeholder="john@example.com" 
+                                      {...field}
+                                      className={cn(
+                                        "h-12 transition-all",
+                                        "hover:ring-2 hover:ring-primary/20",
+                                        "focus:ring-2 focus:ring-primary"
+                                      )}
                                     />
                                   </FormControl>
                                   <FormMessage />
@@ -885,97 +758,99 @@ export default function ServicesPage() {
                               )}
                             />
 
-                            <div className="pt-4 border-t">
-                              <div className="flex justify-between items-center mb-4">
-                                <span className="text-sm text-muted-foreground">Selected Service</span>
-                                <span className="font-medium">{selectedService.service.name}</span>
-                              </div>
-                              <div className="flex justify-between items-center mb-4">
-                                <span className="text-sm text-muted-foreground">Duration</span>
-                                <span className="font-medium">{selectedService.duration} mins</span>
-                              </div>
-                              <div className="flex justify-between items-center">
-                                <span className="text-sm text-muted-foreground">Price</span>
-                                <span className="font-medium">Rp {selectedService.price.toLocaleString()}</span>
-                              </div>
-                            </div>
-
-                            <Button 
-                              type="submit" 
-                              className={cn(
-                                "w-full h-12 text-lg font-semibold",
-                                "transition-all duration-300",
-                                "hover:scale-[1.02] hover:shadow-lg",
-                                "active:scale-[0.98]"
+                            <FormField
+                              control={form.control}
+                              name="phone"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Phone</FormLabel>
+                                  <FormControl>
+                                    <Input 
+                                      type="tel" 
+                                      placeholder="+1234567890" 
+                                      {...field}
+                                      className={cn(
+                                        "h-12 transition-all",
+                                        "hover:ring-2 hover:ring-primary/20",
+                                        "focus:ring-2 focus:ring-primary"
+                                      )}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
                               )}
-                            >
-                              Proceed to Payment
-                            </Button>
+                            />
                           </div>
-                        </Card>
+                        </div>
+
+                        <FormField
+                          control={form.control}
+                          name="terms_accepted"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <BookingTerms
+                                  onAccept={(accepted) => field.onChange(accepted)}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <div className="pt-4 border-t">
+                          <div className="flex justify-between items-center mb-4">
+                            <span className="text-sm text-muted-foreground">Selected Service</span>
+                            <span className="font-medium">{selectedService.service.name}</span>
+                          </div>
+                          <div className="flex justify-between items-center mb-4">
+                            <span className="text-sm text-muted-foreground">Duration</span>
+                            <span className="font-medium">{selectedService.duration} mins</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">Price</span>
+                            <span className="font-medium">Rp {selectedService.price.toLocaleString()}</span>
+                          </div>
+                        </div>
+
+                        <Button 
+                          type="submit" 
+                          className={cn(
+                            "w-full h-12 text-lg font-semibold",
+                            "transition-all duration-300",
+                            "hover:scale-[1.02] hover:shadow-lg",
+                            "active:scale-[0.98]"
+                          )}
+                        >
+                          Confirm Booking
+                        </Button>
                       </div>
-                    )}
-                  </>
+                    </Card>
+                  </div>
                 )}
               </>
             )}
           </form>
         </Form>
 
-        {/* Payment Dialog */}
-        <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>
+        {/* Success Dialog */}
+        <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Complete Your Payment</DialogTitle>
+              <DialogTitle>Booking Confirmed!</DialogTitle>
               <DialogDescription>
-                Choose your preferred payment method
+                Your appointment has been successfully booked. A confirmation email has been sent to your email address.
               </DialogDescription>
             </DialogHeader>
-
-            {!showPaymentDetails ? (
-              <div className="grid gap-4 py-4">
-                {PAYMENT_METHODS.map((method) => (
-                  <Card
-                    key={method.id}
-                    className={cn(
-                      "p-4 cursor-pointer transition-all duration-300",
-                      selectedPaymentMethod === method.id
-                        ? "ring-2 ring-primary bg-primary/5"
-                        : "hover:bg-accent/5 hover:shadow-md",
-                      paymentProcessing && "pointer-events-none opacity-50"
-                    )}
-                    onClick={() => processPayment(method.id)}
-                  >
-                    <div className="flex items-center gap-3">
-                      {method.icon}
-                      <div>
-                        <p className="font-medium">{method.name}</p>
-                        <p className="text-sm text-muted-foreground">{method.description}</p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <div className="py-6">
-                {paymentProcessing ? (
-                  <div className="text-center py-4">
-                    <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-                    <p className="text-sm text-muted-foreground">Processing your payment...</p>
-                   </div>
-                ) : (
-                  <>
-                    <PaymentDetailsContent 
-                      method={selectedPaymentMethod} 
-                      details={paymentDetails!}
-                    />
-                    <p className="text-sm text-muted-foreground text-center mt-4">
-                      Payment expires in 15 minutes
-                    </p>
-                  </>
-                )}
-              </div>
-            )}
+            <div className="flex justify-center py-6">
+              <CheckCircle2 className="h-16 w-16 text-green-500" />
+            </div>
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="w-full"
+            >
+              Book Another Appointment
+            </Button>
           </DialogContent>
         </Dialog>
       </div>
