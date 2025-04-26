@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -24,6 +25,9 @@ import {
 } from '@/components/ui/select'
 import { toast } from 'sonner'
 
+// Mock submit URL (replace with your actual API endpoint)
+const submitFormWorkWithUs = '/api/work-with-us'
+
 // --- 1) Define separate schemas ---
 const jobSchema = z.object({
   name: z.string().min(2, 'Minimal 2 karakter'),
@@ -47,7 +51,7 @@ const collabSchema = z.object({
   message: z.string().min(10, 'Pesan minimal 10 karakter'),
 })
 
-type JobForm   = z.infer<typeof jobSchema>
+type JobForm = z.infer<typeof jobSchema>
 type CollabForm = z.infer<typeof collabSchema>
 
 export default function WorkWithUs() {
@@ -57,7 +61,13 @@ export default function WorkWithUs() {
   // two separate forms
   const jobForm = useForm<JobForm>({
     resolver: zodResolver(jobSchema),
-    defaultValues: { name: '', email: '', phone: '', position: '', experience: '' },
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      position: undefined,
+      experience: '',
+    },
   })
 
   const collabForm = useForm<CollabForm>({
@@ -66,13 +76,11 @@ export default function WorkWithUs() {
       name: '',
       email: '',
       phone: '',
-      opportunityType: '',
+      opportunityType: undefined,
       company: '',
       message: '',
     },
   })
-
-
 
   async function onSubmit(data: JobForm | CollabForm) {
     setLoading(true)
@@ -83,9 +91,15 @@ export default function WorkWithUs() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
+
       if (!res.ok) throw new Error('Network response was not ok')
+
       toast.success('Berhasil dikirim!')
-      tab === 'job' ? jobForm.reset() : collabForm.reset()
+      if (tab === 'job') {
+        jobForm.reset()
+      } else {
+        collabForm.reset()
+      }
     } catch (err) {
       console.error(err)
       toast.error('Gagal kirim, coba lagi.')
@@ -93,7 +107,6 @@ export default function WorkWithUs() {
       setLoading(false)
     }
   }
-
 
   return (
     <div className="min-h-screen pt-24 pb-12">
@@ -125,7 +138,7 @@ export default function WorkWithUs() {
                 onSubmit={jobForm.handleSubmit(onSubmit)}
                 className="space-y-4"
               >
-                {/** Name */}
+                {/* Name */}
                 <FormField
                   control={jobForm.control}
                   name="name"
@@ -140,7 +153,7 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                {/** Email & Phone */}
+                {/* Email & Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={jobForm.control}
@@ -149,7 +162,7 @@ export default function WorkWithUs() {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input type="email" {...field} />
+                          <Input type="email" placeholder="Email" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -162,7 +175,7 @@ export default function WorkWithUs() {
                       <FormItem>
                         <FormLabel>Telepon</FormLabel>
                         <FormControl>
-                          <Input type="tel" {...field} />
+                          <Input type="tel" placeholder="No Telepon" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -170,7 +183,7 @@ export default function WorkWithUs() {
                   />
                 </div>
 
-                {/** Position */}
+                {/* Position */}
                 <FormField
                   control={jobForm.control}
                   name="position"
@@ -200,7 +213,7 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                {/** Experience */}
+                {/* Experience */}
                 <FormField
                   control={jobForm.control}
                   name="experience"
@@ -219,11 +232,7 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={loading}
-                >
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? 'Mengirim...' : 'Kirim Lamaran'}
                 </Button>
               </form>
@@ -234,15 +243,13 @@ export default function WorkWithUs() {
         {/* Collaboration Form */}
         {tab === 'collab' && (
           <Card className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">
-              Business Opportunities
-            </h2>
+            <h2 className="text-2xl font-semibold mb-4">Business Opportunities</h2>
             <Form {...collabForm}>
               <form
                 onSubmit={collabForm.handleSubmit(onSubmit)}
                 className="space-y-4"
               >
-                {/** Name */}
+                {/* Name */}
                 <FormField
                   control={collabForm.control}
                   name="name"
@@ -257,7 +264,7 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                {/** Email & Phone */}
+                {/* Email & Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={collabForm.control}
@@ -266,7 +273,7 @@ export default function WorkWithUs() {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input type="email" {...field} />
+                          <Input type="email" placeholder="Email" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -279,7 +286,7 @@ export default function WorkWithUs() {
                       <FormItem>
                         <FormLabel>Telepon</FormLabel>
                         <FormControl>
-                          <Input type="tel" {...field} />
+                          <Input type="tel" placeholder="No Telepon" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -287,7 +294,7 @@ export default function WorkWithUs() {
                   />
                 </div>
 
-                {/** Opportunity Type */}
+                {/* Opportunity Type */}
                 <FormField
                   control={collabForm.control}
                   name="opportunityType"
@@ -303,21 +310,11 @@ export default function WorkWithUs() {
                             <SelectValue placeholder="Pilih jenis" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="franchise">
-                              Franchise Partnership
-                            </SelectItem>
-                            <SelectItem value="collaboration">
-                              Brand Collaboration
-                            </SelectItem>
-                            <SelectItem value="product">
-                              Product Partnership
-                            </SelectItem>
-                            <SelectItem value="event">
-                              Event Sponsorship
-                            </SelectItem>
-                            <SelectItem value="sponsorship">
-                              Sponsorship
-                            </SelectItem>
+                            <SelectItem value="franchise">Franchise Partnership</SelectItem>
+                            <SelectItem value="collaboration">Brand Collaboration</SelectItem>
+                            <SelectItem value="product">Product Partnership</SelectItem>
+                            <SelectItem value="event">Event Sponsorship</SelectItem>
+                            <SelectItem value="sponsorship">Sponsorship</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>
@@ -326,7 +323,7 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                {/** Company */}
+                {/* Company */}
                 <FormField
                   control={collabForm.control}
                   name="company"
@@ -341,7 +338,7 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                {/** Message */}
+                {/* Message */}
                 <FormField
                   control={collabForm.control}
                   name="message"
@@ -360,14 +357,8 @@ export default function WorkWithUs() {
                   )}
                 />
 
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={loading}
-                >
-                  {loading
-                    ? 'Mengirim...'
-                    : 'Kirim Permintaan Kerja Sama'}
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? 'Mengirim...' : 'Kirim Permintaan Kerja Sama'}
                 </Button>
               </form>
             </Form>
