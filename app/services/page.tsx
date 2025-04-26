@@ -180,7 +180,7 @@ export default function ServicesPage() {
   useEffect(() => {
     async function fetchLocationServices() {
       if (!selectedLocation) return
-  
+    
       const { data, error } = await supabase
         .from('location_services')
         .select(`
@@ -195,19 +195,21 @@ export default function ServicesPage() {
           )
         `)
         .eq('location_id', selectedLocation)
-  
+    
       if (error) {
         toast.error('Failed to load services')
         return
       }
-  
-      setLocationServices(
-        (data || []).map((item) => ({
+    
+      if (data) {
+        const fixedData = data.map((item: any) => ({
           ...item,
           service: Array.isArray(item.service) ? item.service[0] : item.service,
         }))
-      )
+        setLocationServices(fixedData)
+      }
     }
+    
   
     async function fetchLocationSeats() {
       if (!selectedLocation) return
