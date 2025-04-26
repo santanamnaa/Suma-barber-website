@@ -20,7 +20,7 @@ export function Navbar() {
             <Link href="/" className="hover:opacity-60">HOME</Link>
             <Link href="/services" className="hover:opacity-60">SERVICES</Link>
             <Link href="/locations" className="hover:opacity-60">LOCATIONS</Link>
-            {/* <Link href="/work-with-us" className="hover:opacity-60">WORK WITH US</Link> */}
+            <Link href="/work-with-us" className="hover:opacity-60">WORK WITH US</Link>
           </div>
 
           {/* Mobile Menu Button */}
