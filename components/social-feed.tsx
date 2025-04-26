@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Instagram, BookOpen, ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from 'embla-carousel-react'
 import { Button } from "@/components/ui/button"
+import { EmblaCarouselType } from 'embla-carousel';
+
 
 export function SocialFeed() {
   const [activeTab, setActiveTab] = useState("instagram")
@@ -20,7 +22,7 @@ export function SocialFeed() {
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
   
-  const updateScrollState = (api) => {
+  const updateScrollState = (api: EmblaCarouselType | undefined) => {
     if (!api) return;
     setCanScrollPrev(api.canScrollPrev());
     setCanScrollNext(api.canScrollNext());
