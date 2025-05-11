@@ -62,6 +62,14 @@ const config: Config = {
         },
       },
       keyframes: {
+        'pulseGlow': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.6' },
+          '50%': { transform: 'scale(1.05)', opacity: '0.8' },
+        },
+        'slowPulse': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.5' },
+          '50%': { transform: 'scale(1.05)', opacity: '0.7' },
+        },
         'accordion-down': {
           from: {
             height: '0',
@@ -79,9 +87,13 @@ const config: Config = {
           },
         },
       },
+
+
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+        'slow-pulse': 'slowPulse 10s ease-in-out infinite',
       },
     },
   },

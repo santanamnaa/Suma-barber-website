@@ -114,11 +114,6 @@ export interface Database {
           booking_time: string
           total_duration: number
           total_price: number
-          payment_status: 'pending' | 'processing' | 'completed' | 'failed'
-          payment_method: 'qris' | 'bca' | 'gopay'
-          payment_id: string | null
-          payment_details: Json | null
-          payment_expiry: string | null
           staff_id: string | null
           loyalty_points: number
           cancellation_policy: Json
@@ -138,11 +133,6 @@ export interface Database {
           booking_time: string
           total_duration: number
           total_price: number
-          payment_status?: 'pending' | 'processing' | 'completed' | 'failed'
-          payment_method: 'qris' | 'bca' | 'gopay'
-          payment_id?: string | null
-          payment_details?: Json | null
-          payment_expiry?: string | null
           staff_id?: string | null
           loyalty_points?: number
           cancellation_policy?: Json
@@ -162,11 +152,6 @@ export interface Database {
           booking_time?: string
           total_duration?: number
           total_price?: number
-          payment_status?: 'pending' | 'processing' | 'completed' | 'failed'
-          payment_method?: 'qris' | 'bca' | 'gopay'
-          payment_id?: string | null
-          payment_details?: Json | null
-          payment_expiry?: string | null
           staff_id?: string | null
           loyalty_points?: number
           cancellation_policy?: Json
@@ -195,6 +180,26 @@ export interface Database {
           id?: string
           booking_id?: string
           location_service_id?: string
+          created_at?: string
+        }
+      }
+      admins: {
+        Row: {
+          id: string
+          email: string
+          role: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          email: string
+          role?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          role?: string
           created_at?: string
         }
       }

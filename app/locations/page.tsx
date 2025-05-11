@@ -147,11 +147,11 @@ export default function LocationsPage() {
         <h2 className="text-2xl font-bold mb-8">FIND US HERE</h2>
         <div className="grid md:grid-cols-2 gap-10">
           {/* Gegerkalong */}
-          <div className="bg-black shadow-lg rounded-2xl p-4">
+          <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
             <h3 className="text-xl font-semibold mb-2">
               Suma Barber - Gegerkalong
             </h3>
-            <p className="mb-4 text-sm text-gray-600">
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
               Jl. Gegerkalong Hilir No.170, Sukasari, Bandung
             </p>
             <iframe
@@ -166,18 +166,18 @@ export default function LocationsPage() {
               href="https://maps.app.goo.gl/csFqMZym91f82jS78"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-blue-600 hover:underline"
+              className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
               Lihat di Google Maps
             </a>
           </div>
 
           {/* Kiara Artha */}
-          <div className="bg-black shadow-lg rounded-2xl p-4">
+          <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
             <h3 className="text-xl font-semibold mb-2">
               Suma Barber - Kiara Artha
             </h3>
-            <p className="mb-4 text-sm text-gray-600">
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
               Kiara Artha Park, Ruko B22
             </p>
             <iframe
@@ -192,7 +192,7 @@ export default function LocationsPage() {
               href="https://maps.app.goo.gl/WSM1yxLWjZtkFrxD6"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-blue-600 hover:underline"
+              className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
               Lihat di Google Maps
             </a>
@@ -202,4 +202,3 @@ export default function LocationsPage() {
     </div>
   )
 }
-
