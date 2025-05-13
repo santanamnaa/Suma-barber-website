@@ -401,7 +401,8 @@ export default function ServicesPage() {
           seat_id: values.seat,
           total_duration: selectedService.duration,
           total_price: selectedService.price,
-          terms_accepted: values.terms_accepted
+          terms_accepted: values.terms_accepted,
+          location_id: values.location
         })
         .select()
         .single()
@@ -602,9 +603,11 @@ export default function ServicesPage() {
                                         form.setValue('time', '')
                                         form.setValue('seat', '')
                                       }}
-                                      disabled={(date) =>
-                                        date < new Date() || date < new Date("1900-01-01")
-                                      }
+                                      disabled={(date) => {
+                                        const today = new Date();
+                                        today.setHours(0, 0, 0, 0);
+                                        return date < today || date < new Date("1900-01-01");
+                                      }}
                                       initialFocus
                                       className="rounded-md border"
                                     />
