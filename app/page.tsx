@@ -18,31 +18,31 @@ import {
 
 export default function Home() {
   const topics = [
-  {
-    slug: 'face-shape',
-    title: 'Match by Face Shape',
-    icon: <User className="h-12 w-12" />,
-    description: 'Cari potongan rambut terbaik sesuai bentuk wajah Anda.',
-  },
-  {
-    slug: 'hair-type',
-    title: 'Match by Hair Type',
-    icon: <Droplet className="h-12 w-12" />,
-    description: 'Pilihan cut untuk rambut lurus, keriting, atau bergelombang.',
-  },
-  {
-    slug: 'hairstyle',
-    title: 'Modern Hairstyles',
-    icon: <Scissors className="h-12 w-12" />,
-    description: 'Inspirasi gaya rambut terkini untuk semua suasana.',
-  },
-  {
-    slug: 'maintenance',
-    title: 'Care & Maintenance',
-    icon: <Heart className="h-12 w-12" />,
-    description: 'Tips merawat rambut agar selalu sehat dan berkilau.',
-  },
-]
+    {
+      slug: 'face-shape',
+      title: 'Match by Face Shape',
+      image: '/images/discover/face-shape.jpg',
+      description: 'Cari potongan rambut terbaik sesuai bentuk wajah Anda.',
+    },
+    {
+      slug: 'hair-type',
+      title: 'Match by Hair Type',
+      image: '/images/discover/hair-type.jpg',
+      description: 'Pilihan cut untuk rambut lurus, keriting, atau bergelombang.',
+    },
+    {
+      slug: 'hairstyle',
+      title: 'Modern Hairstyles',
+      image: '/images/discover/hairstyle.jpg',
+      description: 'Inspirasi gaya rambut terkini untuk semua suasana.',
+    },
+    {
+      slug: 'maintenance',
+      title: 'Care & Maintenance',
+      image: '/images/discover/maintenance.jpg',
+      description: 'Tips merawat rambut agar selalu sehat dan berkilau.',
+    },
+  ]
   
 
   const whyUs = [
@@ -141,49 +141,47 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 pt-28 md:pt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <HeroSpotlight />
 
-          <div className="space-y-8">
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">
-            SUMA BARBER
-              <br />
-            CERTIFIED EXPERTS
-              <br />
-              EST. 2022
+          <div className="space-y-6 md:space-y-8">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter leading-none">
+              <span className="block">SUMA BARBER</span>
+              <span className="block">CERTIFIED EXPERTS</span>
+              <span className="block">EST. 2022</span>
             </h1>
           </div>
         </div>
       </div>
 
       {/* Brief Intro */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-8">A BRIEF INTRO</h2>
-        <div className="max-w-3xl text-xl leading-relaxed text-muted-foreground dark:text-white">
+      <section className="container mx-auto px-4 py-6 md:py-8">
+        <h2 className="text-xl md:text-2xl font-bold mb-6 md:mb-8">A BRIEF INTRO</h2>
+        <div className="max-w-3xl text-base md:text-xl leading-relaxed text-muted-foreground dark:text-white">
           <p>
             Suma Barber memiliki dua cabang aktif yang berlokasi di{' '}
             <span className="font-semibold">Kiara Artha Park</span> dan{' '}
             <span className="font-semibold">Gegerkalong</span>, menghadirkan layanan grooming berkualitas tinggi.
             Seluruh capster kami telah tersertifikasi secara profesional dan berpengalaman dalam memberikan hasil potongan yang presisi dan memuaskan.
           </p>
-          <p className="mt-6">
+          <p className="mt-4 md:mt-6">
             Kami berkomitmen untuk menjadi barbershop yang tidak hanya menghadirkan hasil terbaik,
             tetapi juga menjadi ruang di mana anak muda dapat mengekspresikan gaya rambut sesuai tren masa kini dengan percaya diri.
           </p>
-          <p className="mt-8 text-2xl font-bold">Sampai jumpa di Suma Barber!</p>
+          <p className="mt-6 md:mt-8 text-xl md:text-2xl font-bold">Sampai jumpa di Suma Barber!</p>
         </div>
       </section>
 
 
       {/* Why Choose Us */}
-      <section className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-12 text-center">WHY CHOOSE US</h2>
+      <section className="container mx-auto px-4 py-6 md:py-8">
+      <h2 className="text-xl md:text-2xl font-bold mb-8 md:mb-12 text-center">WHY CHOOSE US</h2>
 
       <Accordion
         type="single"
         collapsible
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
       >
         {whyUs.map((item, idx) => (
           <AccordionItem
@@ -235,123 +233,123 @@ export default function Home() {
 
 
       {/* Services Section */}
-<section className="container mx-auto px-4 py-16 bg-gradient-to-b from-background to-background/60">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-3xl font-bold mb-2 text-center">OUR SERVICES</h2>
-    <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
-      Professional grooming services tailored to your style and needs
-    </p>
+      <section className="container mx-auto px-4 py-8 md:py-16 bg-gradient-to-b from-background to-background/60">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">OUR SERVICES</h2>
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-12 text-sm md:text-base">
+            Professional grooming services tailored to your style and needs
+          </p>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Kiara Location */}
-      <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-        <div className="bg-black p-6">
-          <h3 className="text-2xl font-bold text-white mb-1">KIARA ARTHA PARK</h3>
-          <p className="text-white/70 text-sm">Premium services at competitive prices</p>
-        </div>
-        
-        <div className="p-6 space-y-8">
-          {servicesKiara.map((serviceGroup, index) => (
-            <div key={index} className="space-y-4">
-              <h4 className="text-lg font-semibold flex items-center">
-                {serviceGroup.category === "Haircut" && <Scissors className="h-5 w-5 mr-2" />}
-                {serviceGroup.category === "Hairstyling" && <Heart className="h-5 w-5 mr-2" />}
-                {serviceGroup.category === "Hair Coloring" && <Droplet className="h-5 w-5 mr-2" />}
-                {serviceGroup.category}
-              </h4>
-              <div className="space-y-3">
-                {serviceGroup.items.map((item, idx) => (
-                  <div key={idx} className="flex justify-between items-center pb-2 border-b border-border/50 group">
-                    <span className="group-hover:text-primary transition-colors">{item.name}</span>
-                    <span className="font-mono text-lg font-bold">{item.price}</span>
+          <div className="grid grid-cols-2 gap-3 md:gap-6">
+            {/* Kiara Location */}
+            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="bg-black p-3 md:p-4">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1">KIARA ARTHA PARK</h3>
+                <p className="text-white/70 text-xs md:text-sm">Premium services at competitive prices</p>
+              </div>
+              
+              <div className="p-3 md:p-4 space-y-4 md:space-y-6">
+                {servicesKiara.map((serviceGroup, index) => (
+                  <div key={index} className="space-y-2 md:space-y-3">
+                    <h4 className="text-sm md:text-base font-semibold flex items-center">
+                      {serviceGroup.category === "Haircut" && <Scissors className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category === "Hairstyling" && <Heart className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category === "Hair Coloring" && <Droplet className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category}
+                    </h4>
+                    <div className="space-y-1 md:space-y-2">
+                      {serviceGroup.items.map((item, idx) => (
+                        <div key={idx} className="flex justify-between items-center pb-1 md:pb-2 border-b border-border/50 group">
+                          <span className="text-xs md:text-sm group-hover:text-primary transition-colors">{item.name}</span>
+                          <span className="font-mono text-sm md:text-base font-bold">{item.price}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
+              
+              <div className="px-3 md:px-4 pb-3 md:pb-4">
+                <Button className="w-full bg-black hover:bg-black/80 group text-sm md:text-base" asChild>
+                  <Link href="/services">
+                    Book Appointment
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
+                  </Link>
+                </Button>
+              </div>
             </div>
-          ))}
-        </div>
-        
-        <div className="px-6 pb-6">
-          <Button variant="outline" className="w-full group" asChild>
-            <Link href="/locations/kiara">
-              Book Appointment
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
-            </Link>
-          </Button>
-        </div>
-      </div>
-      
-      {/* Gegerkalong Location */}
-      <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-        <div className="bg-gradient-to-r from-[#030202] to-[#25423a] p-6">
-          <h3 className="text-2xl font-bold text-white mb-1">GEGERKALONG</h3>
-          <p className="text-white/70 text-sm">Exclusive barbering experience</p>
-        </div>
-        
-        <div className="p-6 space-y-8">
-          {servicesGegerkalong.map((serviceGroup, index) => (
-            <div key={index} className="space-y-4">
-              <h4 className="text-lg font-semibold flex items-center">
-                {serviceGroup.category === "Haircut" && <Scissors className="h-5 w-5 mr-2" />}
-                {serviceGroup.category === "Hairstyling" && <Heart className="h-5 w-5 mr-2" />}
-                {serviceGroup.category === "Hair Coloring" && <Droplet className="h-5 w-5 mr-2" />}
-                {serviceGroup.category}
-              </h4>
-              <div className="space-y-3">
-                {serviceGroup.items.map((item, idx) => (
-                  <div key={idx} className="flex justify-between items-center pb-2 border-b border-border/50 group">
-                    <span className="group-hover:text-primary transition-colors">{item.name}</span>
-                    <span className="font-mono text-lg font-bold">{item.price}</span>
+            
+            {/* Gegerkalong Location */}
+            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="bg-black p-3 md:p-4">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1">GEGERKALONG</h3>
+                <p className="text-white/70 text-xs md:text-sm">Exclusive barbering experience</p>
+              </div>
+              
+              <div className="p-3 md:p-4 space-y-4 md:space-y-6">
+                {servicesGegerkalong.map((serviceGroup, index) => (
+                  <div key={index} className="space-y-2 md:space-y-3">
+                    <h4 className="text-sm md:text-base font-semibold flex items-center">
+                      {serviceGroup.category === "Haircut" && <Scissors className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category === "Hairstyling" && <Heart className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category === "Hair Coloring" && <Droplet className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category}
+                    </h4>
+                    <div className="space-y-1 md:space-y-2">
+                      {serviceGroup.items.map((item, idx) => (
+                        <div key={idx} className="flex justify-between items-center pb-1 md:pb-2 border-b border-border/50 group">
+                          <span className="text-xs md:text-sm group-hover:text-primary transition-colors">{item.name}</span>
+                          <span className="font-mono text-sm md:text-base font-bold">{item.price}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
+              
+              <div className="px-3 md:px-4 pb-3 md:pb-4">
+                <Button className="w-full bg-black hover:bg-black/80 group text-sm md:text-base" asChild>
+                  <Link href="/services">
+                    Book Appointment
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
+                  </Link>
+                </Button>
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-        
-        <div className="px-6 pb-6">
-          <Button className="w-full bg-black hover:bg-black/80 group" asChild>
-            <Link href="/locations/gegerkalong">
-              Book Appointment
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{/* Haircut Insights Section */}
-<section className="container mx-auto px-4 py-16 bg-background">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-4xl font-bold mb-4 tracking-tight">
+      </section>
+      {/* Haircut Insights Section */}
+      <section className="container mx-auto px-4 py-8 md:py-16 bg-background">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 tracking-tight">
             Discover Your Perfect Hairstyle
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground">
             Personalized hair guidance tailored to your unique features. Find a look that not only matches your face but also reflects your personality.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {topics.map((t, index) => (
             <Link
               key={t.slug}
               href={`/discover/${t.slug}`}
-              className="group relative block overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="group relative block overflow-hidden rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
             >
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-6">
-                <h3 className="text-xl font-semibold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-4 md:p-6">
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-1 md:mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
                   {t.title}
                 </h3>
-                <p className="text-white/80 text-sm mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                <p className="text-white/80 text-xs md:text-sm mb-2 md:mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                   {t.description}
                 </p>
                 <div className="flex items-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                  <span className="mr-2">Explore</span>
+                  <span className="text-xs md:text-sm mr-2">Explore</span>
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    className="h-5 w-5 transition-transform group-hover:translate-x-1" 
+                    className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-1" 
                     viewBox="0 0 24 24" 
                     fill="none" 
                     stroke="currentColor" 
@@ -363,80 +361,28 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Background with Icon */}
-              <div className="relative pt-[100%] w-full">
-                <div 
-                  className={`
-                    absolute inset-0 
-                    flex items-center 
-                    justify-center 
-                    transition-all 
-                    duration-300
-                    ${
-                      index === 0 ? 'bg-blue-50 group-hover:bg-blue-100' :
-                      index === 1 ? 'bg-green-50 group-hover:bg-green-100' :
-                      index === 2 ? 'bg-purple-50 group-hover:bg-purple-100' :
-                      'bg-red-50 group-hover:bg-red-100'
-                    }
-                  `}
-                >
-                  <div 
-                    className={`
-                      p-6 
-                      rounded-full 
-                      transition-all 
-                      duration-300
-                      group-hover:scale-110
-                      ${
-                        index === 0 ? 'bg-blue-100 text-blue-600' :
-                        index === 1 ? 'bg-green-100 text-green-600' :
-                        index === 2 ? 'bg-purple-100 text-purple-600' :
-                        'bg-red-100 text-red-600'
-                      }
-                    `}
-                  >
-                    {React.cloneElement(t.icon, { 
-                      className: "h-12 w-12 transition-transform group-hover:rotate-6" 
-                    })}
-                  </div>
-                </div>
+              {/* Background with Image */}
+              <div className="relative pt-[80%] md:pt-[100%] w-full">
+                <Image
+                  src={t.image}
+                  alt={t.title}
+                  fill
+                  className="object-cover rounded-xl md:rounded-2xl transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <div className="inline-block bg-card border border-border rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
-            <div className="flex items-center justify-center mb-6">
-              <div className="p-4 bg-primary/10 rounded-full mr-4">
-                <Scissors className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold">Can't Decide?</h3>
-            </div>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              Our expert stylists are ready to provide personalized guidance and help you find the perfect hairstyle that complements your unique features.
-            </p>
-            <Button 
-              asChild 
-              size="lg" 
-              className="group bg-primary hover:bg-primary/90 transition-colors"
-            >
-              <Link href="/book-consultation">
-                Book Free Consultation
-                <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-            </Button>
-          </div>
         </div>
       </section>
 
 
       {/* Gallery */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-12 text-center">
+      <section className="container mx-auto px-4 py-6 md:py-8">
+        <h2 className="text-xl md:text-2xl font-bold mb-8 md:mb-12 text-center">
           OUR GALLERY
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {featuredGallery.map((img, i) => (
             <Card key={i} className="group overflow-hidden">
               <div className="relative aspect-square">
@@ -468,16 +414,16 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-12 text-center">
+      <section className="container mx-auto px-4 py-6 md:py-8">
+        <h2 className="text-xl md:text-2xl font-bold mb-8 md:mb-12 text-center">
           WHAT OUR CLIENT SAY
         </h2>
       <Testimonials />
       </section>
 
       {/* Social Feed */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-12">
+      <section className="container mx-auto px-4 py-6 md:py-8">
+        <h2 className="text-xl md:text-2xl font-bold mb-8 md:mb-12">
           FOLLOW OUR JOURNEY
         </h2>
         <SocialFeed />
@@ -485,10 +431,10 @@ export default function Home() {
 
       {/* Locations Navigation */}
       <section className="container mx-auto px-4 py-0">
-        <h2 className="text-2xl font-bold mb-12">
+        <h2 className="text-xl md:text-2xl font-bold mb-8 md:mb-12">
           CLICK THE SHOP YOU WANT TO VISIT
         </h2>
-        <div className="space-y-8">
+        <div className="space-y-4 md:space-y-8">
           {[
             { id: '01', name: 'GEGERKALONG', area: 'BANDUNG' },
             { id: '02', name: 'KIARA ARTHA', area: 'BANDUNG' },
@@ -498,12 +444,12 @@ export default function Home() {
               key={loc.id}
               className="group block"
             >
-              <div className="flex items-center space-x-4 py-4 border-t border-foreground">
-                <span className="text-sm opacity-60">{loc.id}</span>
-                <span className="text-2xl font-bold">
+              <div className="flex items-center space-x-4 py-3 md:py-4 border-t border-foreground">
+                <span className="text-xs md:text-sm opacity-60">{loc.id}</span>
+                <span className="text-lg md:text-2xl font-bold">
                   {loc.name},
                 </span>
-                <span className="text-2xl">{loc.area}</span>
+                <span className="text-lg md:text-2xl">{loc.area}</span>
               </div>
             </Link>
           ))}

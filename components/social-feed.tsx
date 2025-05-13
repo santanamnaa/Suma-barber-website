@@ -6,10 +6,13 @@ import { Instagram, BookOpen, ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from 'embla-carousel-react'
 import { Button } from "@/components/ui/button"
 import { EmblaCarouselType } from 'embla-carousel';
+import { useTheme } from "next-themes"
 
 
 export function SocialFeed() {
   const [activeTab, setActiveTab] = useState("instagram")
+  const { theme, resolvedTheme } = useTheme ? useTheme() : { theme: 'light', resolvedTheme: 'light' };
+  const isDark = (theme === 'dark' || resolvedTheme === 'dark');
   const [instagramRef, instagramApi] = useEmblaCarousel({ 
     dragFree: true,
     containScroll: "trimSnaps"
@@ -89,17 +92,18 @@ export function SocialFeed() {
         </TabsList>
         
         <TabsContent value="instagram" className="mt-6">
-          <div className="hidden md:grid md:grid-cols-3 gap-4">
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
             {instagramPosts.map((postId) => (
-              <Card key={postId} className="overflow-hidden">
+              <Card key={postId} className="overflow-hidden p-2 bg-background dark:bg-background border border-border rounded-xl shadow-md flex flex-col items-center justify-center">
                 <iframe 
-                  src={`https://www.instagram.com/p/${postId}/embed/?cr=1&v=14&hidecaption=1&omitscript=1`} 
-                  className="w-full h-[650px] border-0" 
+                  src={`https://www.instagram.com/p/${postId}/embed/?cr=1&v=14&hidecaption=1&omitscript=1&theme=${isDark ? 'dark' : 'light'}`} 
+                  className="w-full h-[650px] border-0 rounded-lg bg-background dark:bg-background" 
                   loading="lazy"
                   allowFullScreen
                   scrolling="no"
                   frameBorder="0"
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                  style={{ background: isDark ? '#18181b' : '#fff' }}
                 />
               </Card>
             ))}
@@ -111,15 +115,16 @@ export function SocialFeed() {
               <div className="flex">
                 {instagramPosts.map((postId) => (
                   <div key={postId} className="flex-[0_0_100%] min-w-0">
-                    <Card className="overflow-hidden mx-2">
+                    <Card className="overflow-hidden mx-2 p-2 bg-background dark:bg-background border border-border rounded-xl shadow-md flex flex-col items-center justify-center">
                       <iframe 
-                        src={`https://www.instagram.com/p/${postId}/embed/?cr=1&v=14&hidecaption=1&omitscript=1`} 
-                        className="w-full h-[650px] border-0" 
+                        src={`https://www.instagram.com/p/${postId}/embed/?cr=1&v=14&hidecaption=1&omitscript=1&theme=${isDark ? 'dark' : 'light'}`} 
+                        className="w-full h-[650px] border-0 rounded-lg bg-background dark:bg-background" 
                         loading="lazy"
                         allowFullScreen
                         scrolling="no"
                         frameBorder="0"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                        style={{ background: isDark ? '#18181b' : '#fff' }}
                       />
                     </Card>
                   </div>
@@ -164,17 +169,18 @@ export function SocialFeed() {
         </TabsContent>
         
         <TabsContent value="tiktok" className="mt-6">
-          <div className="hidden md:grid md:grid-cols-3 gap-4">
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
             {tiktokVideos.map((videoId) => (
-              <Card key={videoId} className="overflow-hidden">
+              <Card key={videoId} className="overflow-hidden p-2 bg-background dark:bg-background border border-border rounded-xl shadow-md flex flex-col items-center justify-center">
                 <iframe 
-                  src={`https://www.tiktok.com/embed/v2/${videoId}?autoplay=1`} 
-                  className="w-full h-[650px] border-0" 
+                  src={`https://www.tiktok.com/embed/v2/${videoId}?autoplay=1&theme=${isDark ? 'dark' : 'light'}`} 
+                  className="w-full h-[650px] border-0 rounded-lg bg-background dark:bg-background" 
                   loading="lazy"
                   allowFullScreen
                   scrolling="no"
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  style={{ background: isDark ? '#18181b' : '#fff' }}
                 />
               </Card>
             ))}
@@ -186,15 +192,16 @@ export function SocialFeed() {
               <div className="flex">
                 {tiktokVideos.map((videoId) => (
                   <div key={videoId} className="flex-[0_0_100%] min-w-0">
-                    <Card className="overflow-hidden mx-2">
+                    <Card className="overflow-hidden mx-2 p-2 bg-background dark:bg-background border border-border rounded-xl shadow-md flex flex-col items-center justify-center">
                       <iframe 
-                        src={`https://www.tiktok.com/embed/v2/${videoId}?autoplay=1`} 
-                        className="w-full h-[650px] border-0" 
+                        src={`https://www.tiktok.com/embed/v2/${videoId}?autoplay=1&theme=${isDark ? 'dark' : 'light'}`} 
+                        className="w-full h-[650px] border-0 rounded-lg bg-background dark:bg-background" 
                         loading="lazy"
                         allowFullScreen
                         scrolling="no"
                         frameBorder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        style={{ background: isDark ? '#18181b' : '#fff' }}
                       />
                     </Card>
                   </div>

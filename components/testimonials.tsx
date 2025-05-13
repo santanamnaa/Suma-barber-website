@@ -190,10 +190,9 @@ const testimonials = [
 
 export function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [columnCount, setColumnCount] = useState(5)
+  const [isMobile, setIsMobile] = useState(false)
 
   const getColumnCount = () => {
     const width = window.innerWidth
@@ -206,6 +205,7 @@ export function Testimonials() {
   useEffect(() => {
     const handleResize = () => {
       setColumnCount(getColumnCount())
+      setIsMobile(window.innerWidth < 640)
     }
 
     handleResize()
@@ -224,9 +224,6 @@ export function Testimonials() {
 
     const autoScroll = () => {
       columnContainers.forEach((col, idx) => {
-        const isHovered = hoveredIndex !== null && Math.floor(hoveredIndex / 6) === idx
-        if (isHovered) return
-
         col.scrollTop += speeds[idx]
         if (speeds[idx] > 0 && col.scrollTop >= col.scrollHeight - col.clientHeight) {
           col.scrollTop = 0
@@ -238,20 +235,47 @@ export function Testimonials() {
       rafId = requestAnimationFrame(autoScroll)
     }
 
+    // Infinite scroll manual di mobile
+    function handleManualScroll(col: HTMLElement) {
+      // Bagian tengah
+      const middle = (col.scrollHeight - col.clientHeight) / 2
+      if (col.scrollTop === 0) {
+        col.scrollTop = middle
+      } else if (col.scrollTop + col.clientHeight >= col.scrollHeight) {
+        col.scrollTop = middle
+      }
+    }
+
+    if (isMobile) {
+      columnContainers.forEach(col => {
+        // Set awal ke tengah agar user bisa scroll ke atas/bawah
+        col.scrollTop = (col.scrollHeight - col.clientHeight) / 2
+        col.addEventListener('scroll', () => handleManualScroll(col))
+      })
+    }
+
     rafId = requestAnimationFrame(autoScroll)
-    return () => cancelAnimationFrame(rafId)
-  }, [hoveredIndex])
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      if (isMobile) {
+        columnContainers.forEach(col => {
+          col.removeEventListener('scroll', () => handleManualScroll(col))
+        })
+      }
+    }
+  }, [isMobile])
 
   // Duplikasikan data untuk efek looping
-  const loopedTestimonials = [...testimonials, ...testimonials]
+  const loopedTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
   return (
     <section className="relative py-8 overflow-hidden bg-background">
       {/* Gradient masks */}
-      <div className="pointer-events-none absolute top-0 h-32 w-full bg-gradient-to-b from-background via-background/80 to-transparent z-20" />
-      <div className="pointer-events-none absolute bottom-0 h-32 w-full bg-gradient-to-t from-background via-background/80 to-transparent z-20" />
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-20" />
-      <div className="pointer-events-none absolute right-0 top-0 h-full bg-gradient-to-l from-background via-background/80 to-transparent z-20" />
+      <div className="pointer-events-none absolute top-0 h-8 sm:h-32 w-full bg-gradient-to-b from-background via-background/80 to-transparent z-20" />
+      <div className="pointer-events-none absolute bottom-0 h-8 sm:h-32 w-full bg-gradient-to-t from-background via-background/80 to-transparent z-20" />
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-background/90 via-background/80 to-transparent z-20" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-background/90 via-background/80 to-transparent z-20" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="relative flex justify-center items-center">
@@ -265,47 +289,25 @@ export function Testimonials() {
 
           <div
             ref={containerRef}
-            className="flex gap-6 overflow-hidden h-[600px] relative z-10"
+            className="flex gap-6 overflow-hidden h-[600px] relative z-10 sm:overflow-hidden overflow-x-auto touch-pan-y"
           >
             {[...Array(columnCount)].map((_, colIndex) => (
               <div
                 key={colIndex}
-                className="column flex flex-col gap-6 w-[300px] overflow-hidden"
-                onMouseMove={(e) => {
-                  setMousePos({
-                    x: e.nativeEvent.offsetX,
-                    y: e.nativeEvent.offsetY,
-                  })
-                }}
+                className={`column flex flex-col gap-6 w-[300px] ${
+                  isMobile ? 'overflow-y-auto touch-pan-y' : 'overflow-hidden'
+                } no-scrollbar`}
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {loopedTestimonials
-                  .slice(colIndex * 6, colIndex * 6 + 10) // ambil lebih banyak untuk looping
+                  .slice(colIndex * 6, colIndex * 6 + 10)
                   .map((testimonial, index) => {
                     const globalIndex = colIndex * 6 + index
                     return (
                       <Card
                         key={globalIndex}
-                        onMouseEnter={() => {
-                          if (selectedIndex === null) setHoveredIndex(globalIndex)
-                        }}
-                        onMouseLeave={() => {
-                          if (selectedIndex === null) setHoveredIndex(null)
-                        }}
-                        onClick={() => {
-                          setSelectedIndex(globalIndex === selectedIndex ? null : globalIndex)
-                          setHoveredIndex(null)
-                        }}
                         className="relative flex flex-col p-6 rounded-2xl border border-border bg-background/80 backdrop-blur-md transition-all duration-500 hover:scale-[1.02] cursor-pointer"
                       >
-                        {(hoveredIndex === globalIndex || selectedIndex === globalIndex) && (
-                          <div
-                            className="pointer-events-none absolute inset-0 rounded-2xl blur-2xl opacity-60 animate-pulse-glow"
-                            style={{
-                              background: `radial-gradient(circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.4), transparent 40%)`,
-                            }}
-                          />
-                        )}
-
                         <Quote className="h-6 w-6 text-primary mb-4 relative z-10" />
                         <p className="text-sm text-muted-foreground mb-6 relative z-10">
                           {testimonial.content}
@@ -332,3 +334,14 @@ export function Testimonials() {
     </section>
   )
 }
+
+<style jsx global>{`
+  .no-scrollbar {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important; /* Safari and Chrome */
+  }
+  .no-scrollbar::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
+`}</style>
