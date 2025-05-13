@@ -16,7 +16,6 @@ import { CalendarIcon, PlusIcon, Pencil, Trash2, LogOut } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Navbar from "@/components/navbar-admin";
 
 // Define types
 type Booking = {
@@ -668,9 +667,6 @@ export default function BookingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Navbar */}
-      <Navbar activeItem="bookings" />
-
       {/* Main content */}
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">

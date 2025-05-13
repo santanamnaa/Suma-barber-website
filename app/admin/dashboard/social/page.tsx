@@ -9,7 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { format, subDays } from "date-fns";
 import { LogOut, RefreshCw, Instagram } from "lucide-react";
-import Navbar from "@/components/navbar-admin";
 
 // Create custom TikTok icon
 const TikTok = () => (
@@ -358,9 +357,6 @@ export default function SocialAnalyticsPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Navbar */}
-      <Navbar activeItem="social-analytics" />
-
       {/* Main content */}
       <main className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">

@@ -212,80 +212,111 @@ export default function AdminDashboardPage() {
   const fetchDashboardData = async (days: number) => {
     setDataLoading(true);
     try {
-      console.log("Fetching dashboard data...");
-      
       // Fetch bookings
       const { data: bookingsData, error: bookingsError } = await supabase
         .from("bookings")
-        .select("*")
+        .select("*, booking_services:booking_services(*, location_services(*, services(*)))")
         .order("booking_date", { ascending: false });
-      
       if (bookingsError) throw bookingsError;
 
-      // Process the fetched data
-      // This is a simplified version to avoid long loading times
-      let processedBookings = [];
-      
-      if (bookingsData) {
-        // Just take the first few records to speed up processing
-        const limitedBookings = bookingsData.slice(0, 10);
-        
-        processedBookings = limitedBookings.map(booking => ({
-          ...booking,
-          services: [],
-          location_name: "Sample Location"
-        }));
-      }
+      // Fetch locations
+      const { data: locationsData, error: locationsError } = await supabase
+        .from("locations")
+        .select("*");
+      if (locationsError) throw locationsError;
 
-      // Set dummy data for testing
+      // Fetch services
+      const { data: servicesData, error: servicesError } = await supabase
+        .from("services")
+        .select("*");
+      if (servicesError) throw servicesError;
+
+      // Fetch location_services
+      const { data: locationServicesData, error: locationServicesError } = await supabase
+        .from("location_services")
+        .select("*");
+      if (locationServicesError) throw locationServicesError;
+
+      setLocations(locationsData || []);
+      setServices(servicesData || []);
+      setLocationServices(locationServicesData || []);
+
+      // Process bookings and services
+      let processedBookings = [];
+      if (bookingsData) {
+        processedBookings = bookingsData.map((booking: any) => {
+          // Get location name
+          const location = locationsData?.find((loc: any) => loc.id === booking.location_id);
+          // Get services for this booking
+          const services = (booking.booking_services || []).map((bs: any) => {
+            const locService = bs.location_services;
+            return {
+              id: bs.id,
+              service_name: locService?.services?.name || "",
+              location_name: location?.name || "",
+              price: bs.price || 0,
+              duration: bs.duration || 0,
+            };
+          });
+          return {
+            ...booking,
+            services,
+            location_name: location?.name || "",
+          };
+        });
+      }
       setBookings(processedBookings);
       setTotalBookings(processedBookings.length);
       setTotalRevenue(processedBookings.reduce((sum, booking) => sum + (booking.total_price || 0), 0));
-      
-      // Create dummy visitor stats
-      const dummyVisitorStats = Array.from({ length: days }, (_, i) => {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        return {
-          day: date.toISOString().split('T')[0],
-          count: Math.floor(Math.random() * 20) + 10
-        };
+
+      // Booking stats per day (for the selected time range)
+      const now = new Date();
+      const startDate = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+      const bookingStatsMap: { [date: string]: number } = {};
+      processedBookings.forEach((booking: any) => {
+        const dateStr = booking.booking_date;
+        if (dateStr) {
+          if (!bookingStatsMap[dateStr]) bookingStatsMap[dateStr] = 0;
+          bookingStatsMap[dateStr]++;
+        }
       });
-      
-      setVisitorStats(dummyVisitorStats);
-      
-      // Create dummy booking stats
-      const dummyBookingStats = Array.from({ length: days }, (_, i) => {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        return {
-          day: date.toISOString().split('T')[0],
-          count: Math.floor(Math.random() * 5) + 1
-        };
+      const bookingStatsArr = Object.entries(bookingStatsMap)
+        .filter(([date]) => new Date(date) >= startDate)
+        .map(([day, count]) => ({ day, count }));
+      setBookingStats(bookingStatsArr);
+
+      // Popular services (by count)
+      const serviceCount: { [name: string]: number } = {};
+      processedBookings.forEach((booking: any) => {
+        booking.services.forEach((s: any) => {
+          if (!serviceCount[s.service_name]) serviceCount[s.service_name] = 0;
+          serviceCount[s.service_name]++;
+        });
       });
-      
-      setBookingStats(dummyBookingStats);
-      
-      // Set dummy popular services
-      setPopularServices([
-        { name: "Service 1", bookings: 45, revenue: 2250 },
-        { name: "Service 2", bookings: 30, revenue: 1500 },
-        { name: "Service 3", bookings: 25, revenue: 1250 },
-        { name: "Service 4", bookings: 20, revenue: 1000 },
-        { name: "Service 5", bookings: 15, revenue: 750 }
-      ]);
-      
-      // Set dummy revenue by service
-      setRevenueByService([
-        { name: "Service 1", revenue: 2250 },
-        { name: "Service 2", revenue: 1500 },
-        { name: "Service 3", revenue: 1250 },
-        { name: "Service 4", revenue: 1000 },
-        { name: "Service 5", revenue: 750 }
-      ]);
-      
-      console.log("Dashboard data loaded successfully");
-      
+      const popularServicesArr = Object.entries(serviceCount)
+        .map(([name, bookings]) => ({ name, bookings }))
+        .sort((a, b) => b.bookings - a.bookings)
+        .slice(0, 5);
+      setPopularServices(popularServicesArr);
+
+      // Revenue by service
+      const serviceRevenue: { [name: string]: number } = {};
+      processedBookings.forEach((booking: any) => {
+        booking.services.forEach((s: any) => {
+          if (!serviceRevenue[s.service_name]) serviceRevenue[s.service_name] = 0;
+          serviceRevenue[s.service_name] += s.price || 0;
+        });
+      });
+      const revenueByServiceArr = Object.entries(serviceRevenue)
+        .map(([name, revenue]) => ({ name, revenue }))
+        .sort((a, b) => b.revenue - a.revenue)
+        .slice(0, 5);
+      setRevenueByService(revenueByServiceArr);
+
+      // Visitor stats: If you have a visitors table, fetch and aggregate here. Otherwise, leave as is or comment out.
+      // setVisitorStats(...)
+
+      setDataLoading(false);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
       toast({
@@ -293,44 +324,13 @@ export default function AdminDashboardPage() {
         title: "Error",
         description: "Failed to load dashboard data"
       });
-    } finally {
       setDataLoading(false);
     }
   };
 
   // Fetch reference data (locations, services)
   const fetchReferenceData = async () => {
-    try {
-      console.log("Fetching reference data...");
-      
-      // Set dummy locations
-      setLocations([
-        { id: "1", name: "Location 1" },
-        { id: "2", name: "Location 2" },
-        { id: "3", name: "Location 3" }
-      ]);
-      
-      // Set dummy services
-      setServices([
-        { id: "1", name: "Service 1" },
-        { id: "2", name: "Service 2" },
-        { id: "3", name: "Service 3" },
-        { id: "4", name: "Service 4" }
-      ]);
-      
-      // Set dummy location services
-      setLocationServices([
-        { id: "1", location_id: "1", service_id: "1", price: 50, duration: 30 },
-        { id: "2", location_id: "1", service_id: "2", price: 70, duration: 45 },
-        { id: "3", location_id: "2", service_id: "1", price: 55, duration: 30 },
-        { id: "4", location_id: "2", service_id: "3", price: 90, duration: 60 }
-      ]);
-      
-      console.log("Reference data loaded successfully");
-      
-    } catch (error) {
-      console.error('Error fetching reference data:', error);
-    }
+    // No longer needed, handled in fetchDashboardData
   };
 
   // Mock function to fetch social media stats
@@ -394,7 +394,7 @@ export default function AdminDashboardPage() {
   // Show loading state while checking authentication
   if (authLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen p-2 sm:p-4">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-t-blue-500 border-b-blue-500 rounded-full animate-spin mx-auto"></div>
           <p className="mt-4 text-lg">Checking authentication...</p>
@@ -410,18 +410,7 @@ export default function AdminDashboardPage() {
 
   // Return the dashboard UI
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-md">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Suma Barber Admin</h1>
-          <Button variant="outline" onClick={handleSignOut}>
-            <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
-          </Button>
-        </div>
-      </header>
-
+    <div className="w-full max-w-7xl mx-auto p-2 sm:p-4 md:p-6">
       {/* Main content */}
       <main className="container mx-auto px-4 py-8">
         {/* Tabs */}
@@ -453,7 +442,7 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {/* Stats Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                   <Card>
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm font-medium">Total Bookings</CardTitle>
@@ -526,58 +515,60 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {/* Charts */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Visitors & Bookings</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="h-80">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart
-                            data={visitorStats.map(day => ({
-                              date: new Date(day.day).toLocaleDateString(),
-                              visitors: day.count,
-                              bookings: bookingStats.find(b => b.day === day.day)?.count || 0
-                            }))}
-                            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-                          >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="date" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="visitors" stroke="#8884d8" activeDot={{ r: 8 }} />
-                            <Line type="monotone" dataKey="bookings" stroke="#82ca9d" />
-                          </LineChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="w-full overflow-x-auto mb-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Visitors & Bookings</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="h-80">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <LineChart
+                              data={visitorStats.map(day => ({
+                                date: new Date(day.day).toLocaleDateString(),
+                                visitors: day.count,
+                                bookings: bookingStats.find(b => b.day === day.day)?.count || 0
+                              }))}
+                              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                            >
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="date" />
+                              <YAxis />
+                              <Tooltip />
+                              <Legend />
+                              <Line type="monotone" dataKey="visitors" stroke="#8884d8" activeDot={{ r: 8 }} />
+                              <Line type="monotone" dataKey="bookings" stroke="#82ca9d" />
+                            </LineChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </CardContent>
+                    </Card>
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Popular Services</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="h-80">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart
-                            data={popularServices}
-                            layout="vertical"
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                          >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis type="number" />
-                            <YAxis dataKey="name" type="category" width={150} />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="bookings" fill="#8884d8" />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </CardContent>
-                  </Card>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Popular Services</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="h-80">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              data={popularServices}
+                              layout="vertical"
+                              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                            >
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis type="number" />
+                              <YAxis dataKey="name" type="category" width={150} />
+                              <Tooltip />
+                              <Legend />
+                              <Bar dataKey="bookings" fill="#8884d8" />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
 
                 {/* Recent Bookings */}

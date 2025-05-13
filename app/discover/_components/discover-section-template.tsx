@@ -110,45 +110,6 @@ const DiscoverSectionPage: NextPage<DiscoverPageProps> = ({ title, items }) => (
               </p>
             )}
           </div>
-
-          <div className="mt-6 flex justify-between items-center">
-            <Link
-              href="/book-consultation"
-              className="
-                flex 
-                items-center 
-                text-primary 
-                group-hover:text-primary/80 
-                transition-colors
-              "
-            >
-              <span className="mr-2 font-semibold">Book Consultation</span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 transform transition-transform group-hover:translate-x-1" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </Link>
-
-            <div 
-              className="
-                text-muted-foreground 
-                text-sm 
-                italic
-                opacity-70
-                group-hover:opacity-100
-                transition-opacity
-              "
-            >
-              Expert Guided
-            </div>
-          </div>
         </div>
       </div>
     ))}

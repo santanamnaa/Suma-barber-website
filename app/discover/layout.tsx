@@ -41,16 +41,12 @@ export default function DiscoverLayout({
           Discover Hair Education
         </h1>
         
-        <nav className="flex justify-center gap-4 mb-16">
+        <nav className="flex mb-16 gap-3 md:gap-4 overflow-x-auto md:overflow-visible px-1 -mx-1 md:mx-0 scrollbar-hide">
           {navItems.map((item) => (
             <Link
               key={item.slug}
               href={`/discover/${item.slug}`}
-              className="group flex items-center gap-2 px-4 py-2 rounded-xl 
-                bg-card hover:bg-primary/10 
-                border border-border 
-                transition-all duration-300 
-                hover:shadow-lg"
+              className="group flex items-center gap-2 px-3 py-2 md:px-4 rounded-xl min-w-fit whitespace-nowrap bg-card hover:bg-primary/10 border border-border transition-all duration-300 hover:shadow-lg"
             >
               <item.icon 
                 className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" 

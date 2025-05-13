@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase/client";
+import { Menu } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
@@ -13,6 +14,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const pathname = usePathname();
   const { toast } = useToast();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -106,11 +108,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="flex h-screen bg-black text-white">
-      {/* Sidebar */}
-      <div className="w-64 bg-gray-900 shadow-lg">
-        <div className="p-6">
+    <div className="flex flex-col md:flex-row h-screen bg-black text-white">
+      {/* Sidebar for desktop, drawer for mobile */}
+      {/* Mobile Hamburger */}
+      <div className="md:hidden flex items-center justify-between bg-gray-900 p-4 shadow-md">
+        <h2 className="text-lg font-semibold">Suma Barber Admin</h2>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Open sidebar">
+          <Menu size={28} />
+        </button>
+      </div>
+      {/* Sidebar Drawer (Mobile) */}
+      <div
+        className={`fixed inset-0 z-40 bg-black bg-opacity-60 transition-opacity md:hidden ${sidebarOpen ? "block" : "hidden"}`}
+        onClick={() => setSidebarOpen(false)}
+      />
+      <aside
+        className={`fixed top-0 left-0 z-50 h-full w-64 bg-gray-900 shadow-lg transform transition-transform md:relative md:translate-x-0 md:block ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <div className="p-6 flex items-center justify-between md:block">
           <h1 className="text-2xl font-bold">Suma Admin</h1>
+          <button className="md:hidden" onClick={() => setSidebarOpen(false)} aria-label="Close sidebar">
+            ✕
+          </button>
         </div>
         <nav className="mt-6">
           <ul>
@@ -146,16 +165,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             Sign Out
           </Button>
         </div>
-      </div>
-
+      </aside>
       {/* Main Content */}
-      <div className="flex-1 overflow-auto bg-black">
-        <header className="bg-gray-900 shadow-md p-4">
+      <div className="flex-1 overflow-auto bg-black pt-0 md:pt-0">
+        <header className="hidden md:block bg-gray-900 shadow-md p-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold">Suma Barber Admin</h2>
           </div>
         </header>
-        <main className="p-6">{children}</main>
+        <main className="p-2 sm:p-4 md:p-6">{children}</main>
       </div>
     </div>
   );
