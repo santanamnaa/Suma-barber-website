@@ -204,18 +204,26 @@ export const fetchBookings = async (
     // Apply filters
     if (locationId) {
       // For location filtering, we need to look at booking_services
-      const { data: bookingIds } = await supabase
-        .from('booking_services')
-        .select('booking_id')
-        .eq('location_services.location_id', locationId)
-        .select('booking_id')
-        .eq('location_services.location_id', locationId);
-      
-      if (bookingIds?.length) {
-        const ids: string[] = bookingIds.map((item: { booking_id: string }) => item.booking_id);
-        query = query.in('id', ids);
+      // Ambil semua location_service_id untuk locationId ini
+      const { data: locationServices } = await supabase
+        .from('location_services')
+        .select('id')
+        .eq('location_id', locationId);
+      const locationServiceIds = locationServices?.map((ls: any) => ls.id) || [];
+      if (locationServiceIds.length > 0) {
+        const { data: bookingIds } = await supabase
+          .from('booking_services')
+          .select('booking_id')
+          .in('location_service_id', locationServiceIds);
+        if (bookingIds?.length) {
+          const ids: string[] = bookingIds.map((item: { booking_id: string }) => item.booking_id);
+          query = query.in('id', ids);
+        } else {
+          // No bookings for this location
+          return { data: [], count: 0, page, pageSize, totalPages: 0 };
+        }
       } else {
-        // No bookings for this location
+        // No location_services for this location
         return { data: [], count: 0, page, pageSize, totalPages: 0 };
       }
     }
@@ -271,25 +279,34 @@ export const fetchBookings = async (
         `)
         .eq('booking_id', booking.id);
       
-      const services = bookingServicesData?.map(bs => ({
+      const services = (bookingServicesData?.map((bs: any) => ({
         id: bs.location_services.id,
         name: bs.location_services.services.name,
         price: bs.location_services.price,
         duration: bs.location_services.duration
-      })) || [];
+      })) || []);
       
       // Get first service's location name as the booking location
       let location_name = null;
       if (bookingServicesData && bookingServicesData.length > 0) {
-        const firstServiceLocationId = bookingServicesData[0].location_services.id;
-        
+        let firstServiceLocationId: any = null;
+        const locSvc: any = bookingServicesData[0].location_services;
+        if (Array.isArray(locSvc)) {
+          firstServiceLocationId = locSvc[0]?.id;
+        } else {
+          firstServiceLocationId = locSvc?.id;
+        }
         const { data: locationData } = await supabase
           .from('location_services')
           .select('locations!inner(name)')
           .eq('id', firstServiceLocationId)
           .single();
-        
-        location_name = locationData?.locations?.name || null;
+        if (Array.isArray(locationData?.locations)) {
+          const locArr: any = locationData.locations;
+          location_name = locArr.length > 0 ? locArr[0]?.name || null : null;
+        } else {
+          location_name = (locationData?.locations as any)?.name || null;
+        }
       }
       
       processedBookings.push({
@@ -388,7 +405,7 @@ export const fetchDashboardStats = async (days: number): Promise<{
     }
     
     // Count bookings per day
-    bookingsData?.forEach(booking => {
+    (bookingsData as any[])?.forEach((booking: any) => {
       const dateStr = booking.booking_date;
       if (bookingStatsByDay[dateStr] !== undefined) {
         bookingStatsByDay[dateStr]++;
@@ -398,7 +415,7 @@ export const fetchDashboardStats = async (days: number): Promise<{
     // Process popular services
     const serviceStats: { [key: string]: { count: number, revenue: number } } = {};
     
-    bookingServicesData?.forEach(bs => {
+    bookingServicesData?.forEach((bs: any) => {
       const serviceName = bs.location_services?.services?.name || 'Unknown Service';
       
       if (!serviceStats[serviceName]) {
@@ -412,7 +429,7 @@ export const fetchDashboardStats = async (days: number): Promise<{
     // Process location stats
     const locationStats: { [key: string]: { bookings: number, revenue: number } } = {};
     
-    bookingServicesData?.forEach(bs => {
+    bookingServicesData?.forEach((bs: any) => {
       const locationName = bs.location_services?.locations?.name || 'Unknown Location';
       
       if (!locationStats[locationName]) {
@@ -528,7 +545,7 @@ export const fetchLocationServices = async (
       throw error;
     }
     
-    return data?.map(item => ({
+    return data?.map((item: any) => ({
       ...item,
       service_name: item.services?.name || 'Unknown Service',
       location_name: item.locations?.name || 'Unknown Location',

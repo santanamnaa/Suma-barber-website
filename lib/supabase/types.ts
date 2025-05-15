@@ -6,203 +6,210 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+// lib/supabase/types.ts
+export type Database = {
   public: {
     Tables: {
-      locations: {
-        Row: {
-          id: string
-          name: string
-          area: string
-          address: string
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          name: string
-          area: string
-          address: string
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          area?: string
-          address?: string
-          created_at?: string
-        }
-      }
-      services: {
-        Row: {
-          id: string
-          name: string
-          description: string
-          image_url: string
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          name: string
-          description: string
-          image_url: string
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          description?: string
-          image_url?: string
-          created_at?: string
-        }
-      }
-      seats: {
-        Row: {
-          id: string
-          location_id: string
-          name: string
-          is_active: boolean
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          location_id: string
-          name: string
-          is_active?: boolean
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          location_id?: string
-          name?: string
-          is_active?: boolean
-          created_at?: string
-        }
-      }
-      location_services: {
-        Row: {
-          id: string
-          location_id: string
-          service_id: string
-          price: number
-          duration: number
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          location_id: string
-          service_id: string
-          price: number
-          duration: number
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          location_id?: string
-          service_id?: string
-          price?: number
-          duration?: number
-          created_at?: string
-        }
-      }
-      bookings: {
-        Row: {
-          id: string
-          customer_name: string
-          customer_email: string
-          customer_phone: string
-          booking_date: string
-          booking_time: string
-          total_duration: number
-          total_price: number
-          staff_id: string | null
-          loyalty_points: number
-          cancellation_policy: Json
-          notification_preferences: Json
-          seat_id: string | null
-          check_in_time: string | null
-          is_forfeited: boolean
-          terms_accepted: boolean
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          customer_name: string
-          customer_email: string
-          customer_phone: string
-          booking_date: string
-          booking_time: string
-          total_duration: number
-          total_price: number
-          staff_id?: string | null
-          loyalty_points?: number
-          cancellation_policy?: Json
-          notification_preferences?: Json
-          seat_id?: string | null
-          check_in_time?: string | null
-          is_forfeited?: boolean
-          terms_accepted?: boolean
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          customer_name?: string
-          customer_email?: string
-          customer_phone?: string
-          booking_date?: string
-          booking_time?: string
-          total_duration?: number
-          total_price?: number
-          staff_id?: string | null
-          loyalty_points?: number
-          cancellation_policy?: Json
-          notification_preferences?: Json
-          seat_id?: string | null
-          check_in_time?: string | null
-          is_forfeited?: boolean
-          terms_accepted?: boolean
-          created_at?: string
-        }
-      }
-      booking_services: {
-        Row: {
-          id: string
-          booking_id: string
-          location_service_id: string
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          booking_id: string
-          location_service_id: string
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          booking_id?: string
-          location_service_id?: string
-          created_at?: string
-        }
-      }
       admins: {
         Row: {
-          id: string
-          email: string
-          role: string
-          created_at: string
-        }
+          id: string;
+          email: string;
+          name: string;
+          created_at: string;
+          // tambahkan kolom lain jika diperlukan
+        };
         Insert: {
-          id?: string
-          email: string
-          role?: string
-          created_at?: string
-        }
+          // kolom yang diperlukan untuk insert
+          email: string;
+          name: string;
+          created_at?: string;
+        };
         Update: {
-          id?: string
-          email?: string
-          role?: string
-          created_at?: string
-        }
-      }
-    }
-  }
-}
+          // kolom opsional untuk update
+          email?: string;
+          name?: string;
+          created_at?: string;
+        };
+      };
+      bookings: {
+        Row: {
+          id: string;
+          customer_name: string;
+          customer_email: string;
+          customer_phone: string;
+          booking_date: string;
+          booking_time: string;
+          location_id: string;
+          seat_id?: string | null;
+          status: string;
+          total_price: number;
+          created_at: string;
+          // tambahkan kolom lain jika diperlukan
+        };
+        Insert: {
+          // kolom yang diperlukan untuk insert
+          customer_name: string;
+          customer_email: string;
+          customer_phone: string;
+          booking_date: string;
+          booking_time: string;
+          location_id: string;
+          // kolom opsional
+          seat_id?: string | null;
+          status?: string;
+          total_price?: number;
+          created_at?: string;
+        };
+        Update: {
+          // semua kolom opsional
+          customer_name?: string;
+          customer_email?: string;
+          customer_phone?: string;
+          booking_date?: string;
+          booking_time?: string;
+          location_id?: string;
+          seat_id?: string | null;
+          status?: string;
+          total_price?: number;
+          created_at?: string;
+        };
+      };
+      booking_services: {
+        Row: {
+          id: string;
+          booking_id: string;
+          location_service_id: string;
+          created_at: string;
+        };
+        Insert: {
+          booking_id: string;
+          location_service_id: string;
+          created_at?: string;
+        };
+        Update: {
+          booking_id?: string;
+          location_service_id?: string;
+          created_at?: string;
+        };
+      };
+      locations: {
+        Row: {
+          id: string;
+          name: string;
+          address: string;
+          created_at: string;
+        };
+        Insert: {
+          name: string;
+          address: string;
+          created_at?: string;
+        };
+        Update: {
+          name?: string;
+          address?: string;
+          created_at?: string;
+        };
+      };
+      location_services: {
+        Row: {
+          id: string;
+          location_id: string;
+          service_id: string;
+          price: number;
+          duration: number;
+          created_at: string;
+        };
+        Insert: {
+          location_id: string;
+          service_id: string;
+          price: number;
+          duration: number;
+          created_at?: string;
+        };
+        Update: {
+          location_id?: string;
+          service_id?: string;
+          price?: number;
+          duration?: number;
+          created_at?: string;
+        };
+      };
+      seats: {
+        Row: {
+          id: string;
+          name: string;
+          location_id: string;
+          created_at: string;
+        };
+        Insert: {
+          name: string;
+          location_id: string;
+          created_at?: string;
+        };
+        Update: {
+          name?: string;
+          location_id?: string;
+          created_at?: string;
+        };
+      };
+      services: {
+        Row: {
+          id: string;
+          name: string;
+          description?: string;
+          created_at: string;
+        };
+        Insert: {
+          name: string;
+          description?: string;
+          created_at?: string;
+        };
+        Update: {
+          name?: string;
+          description?: string;
+          created_at?: string;
+        };
+      };
+      testimonials: {
+        Row: {
+          id: string;
+          customer_name: string;
+          service_id: string;
+          rating: number;
+          comment: string;
+          created_at: string;
+        };
+        Insert: {
+          customer_name: string;
+          service_id: string;
+          rating: number;
+          comment: string;
+          created_at?: string;
+        };
+        Update: {
+          customer_name?: string;
+          service_id?: string;
+          rating?: number;
+          comment?: string;
+          created_at?: string;
+        };
+      };
+    };
+    Views: {
+      [key: string]: {
+        Row: Record<string, unknown>;
+        Insert: Record<string, unknown>;
+        Update: Record<string, unknown>;
+      };
+    };
+    Functions: {
+      [key: string]: {
+        Args: Record<string, unknown>;
+        Returns: unknown;
+      };
+    };
+    Enums: {
+      [key: string]: string[];
+    };
+  };
+};

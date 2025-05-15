@@ -5,7 +5,7 @@ export type Location = Database['public']['Tables']['locations']['Row'];
 export type Service = Database['public']['Tables']['services']['Row'];
 export type Seat = Database['public']['Tables']['seats']['Row'];
 export type LocationService = Database['public']['Tables']['location_services']['Row'];
-export type Booking = Database['public']['Tables']['bookings']['Row'];
+export type Booking = Database['public']['Tables']['bookings']['Row'] & { location_id: string };
 export type BookingService = Database['public']['Tables']['booking_services']['Row'];
 export type Admin = Database['public']['Tables']['admins']['Row'];
 
