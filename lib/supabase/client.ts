@@ -81,6 +81,16 @@ export const checkAdminAuth = async (): Promise<AuthResult> => {
     return { authenticated: false, error: (error as Error).message }
   }
 }
+export const fetchOptimizedDashboardStats = async (days: number, locationId?: string) => {
+  const { data, error } = await supabase
+    .rpc('get_dashboard_stats', {
+      days_param: days,
+      loc_id: locationId
+    });
+
+  if (error) throw new Error(error.message);
+  return data;
+};
 
 // Helper function to fetch booking services with details
 export const fetchBookingServicesWithDetails = async (

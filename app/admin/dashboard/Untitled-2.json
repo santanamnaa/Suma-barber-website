@@ -1,0 +1,667 @@
+[
+    {
+      "get_dashboard_stats": {
+        "summary": {
+          "total_revenue": 29296400,
+          "total_bookings": 589,
+          "conversion_rate": 0.95,
+          "total_customers": 578,
+          "avg_booking_value": 49739,
+          "avg_booking_duration": 59.7962648556876
+        },
+        "status_dist": [
+          {
+            "count": 1,
+            "status": "completed",
+            "percentage": 0.1697792869269949
+          },
+          {
+            "count": 588,
+            "status": "scheduled",
+            "percentage": 99.830220713073
+          }
+        ],
+        "testimonials": [],
+        "booking_stats": [
+          {
+            "day": "2025-04-16",
+            "count": 27,
+            "revenue": 1379847
+          },
+          {
+            "day": "2025-04-17",
+            "count": 16,
+            "revenue": 758995
+          },
+          {
+            "day": "2025-04-18",
+            "count": 12,
+            "revenue": 595557
+          },
+          {
+            "day": "2025-04-19",
+            "count": 13,
+            "revenue": 643075
+          },
+          {
+            "day": "2025-04-20",
+            "count": 15,
+            "revenue": 730093
+          },
+          {
+            "day": "2025-04-21",
+            "count": 28,
+            "revenue": 1402806
+          },
+          {
+            "day": "2025-04-22",
+            "count": 19,
+            "revenue": 947819
+          },
+          {
+            "day": "2025-04-23",
+            "count": 31,
+            "revenue": 1530811
+          },
+          {
+            "day": "2025-04-24",
+            "count": 14,
+            "revenue": 683504
+          },
+          {
+            "day": "2025-04-25",
+            "count": 26,
+            "revenue": 1290842
+          },
+          {
+            "day": "2025-04-26",
+            "count": 20,
+            "revenue": 1000663
+          },
+          {
+            "day": "2025-04-27",
+            "count": 24,
+            "revenue": 1166428
+          },
+          {
+            "day": "2025-04-28",
+            "count": 17,
+            "revenue": 867576
+          },
+          {
+            "day": "2025-04-29",
+            "count": 26,
+            "revenue": 1312358
+          },
+          {
+            "day": "2025-04-30",
+            "count": 20,
+            "revenue": 1007832
+          },
+          {
+            "day": "2025-05-01",
+            "count": 17,
+            "revenue": 858360
+          },
+          {
+            "day": "2025-05-02",
+            "count": 19,
+            "revenue": 962264
+          },
+          {
+            "day": "2025-05-03",
+            "count": 22,
+            "revenue": 1093120
+          },
+          {
+            "day": "2025-05-04",
+            "count": 24,
+            "revenue": 1179297
+          },
+          {
+            "day": "2025-05-05",
+            "count": 16,
+            "revenue": 794160
+          },
+          {
+            "day": "2025-05-06",
+            "count": 13,
+            "revenue": 651465
+          },
+          {
+            "day": "2025-05-07",
+            "count": 19,
+            "revenue": 972555
+          },
+          {
+            "day": "2025-05-08",
+            "count": 30,
+            "revenue": 1452231
+          },
+          {
+            "day": "2025-05-09",
+            "count": 12,
+            "revenue": 626267
+          },
+          {
+            "day": "2025-05-10",
+            "count": 11,
+            "revenue": 555702
+          },
+          {
+            "day": "2025-05-11",
+            "count": 20,
+            "revenue": 1023399
+          },
+          {
+            "day": "2025-05-12",
+            "count": 21,
+            "revenue": 1060954
+          },
+          {
+            "day": "2025-05-13",
+            "count": 18,
+            "revenue": 888019
+          },
+          {
+            "day": "2025-05-14",
+            "count": 29,
+            "revenue": 1420401
+          },
+          {
+            "day": "2025-05-15",
+            "count": 6,
+            "revenue": 270000
+          },
+          {
+            "day": "2025-05-16",
+            "count": 4,
+            "revenue": 170000
+          }
+        ],
+        "top_customers": [
+          {
+            "name": "Santana Mena",
+            "email": "santanamnaa8@gmail.com",
+            "phone": "+6282321879086",
+            "last_visit": "2025-05-16",
+            "first_visit": "2025-05-14",
+            "total_spent": 440000,
+            "visit_count": 10,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 9-14",
+            "email": "dummy9-14@mail.com",
+            "phone": "0812345678914",
+            "last_visit": "2025-04-23",
+            "first_visit": "2025-04-23",
+            "total_spent": 59996,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 19-15",
+            "email": "dummy19-15@mail.com",
+            "phone": "08123456781915",
+            "last_visit": "2025-05-03",
+            "first_visit": "2025-05-03",
+            "total_spent": 59957,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 21-3",
+            "email": "dummy21-3@mail.com",
+            "phone": "08123456782103",
+            "last_visit": "2025-05-05",
+            "first_visit": "2025-05-05",
+            "total_spent": 59944,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 30-24",
+            "email": "dummy30-24@mail.com",
+            "phone": "08123456783024",
+            "last_visit": "2025-05-14",
+            "first_visit": "2025-05-14",
+            "total_spent": 59935,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 12-9",
+            "email": "dummy12-9@mail.com",
+            "phone": "08123456781209",
+            "last_visit": "2025-04-26",
+            "first_visit": "2025-04-26",
+            "total_spent": 59880,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 18-8",
+            "email": "dummy18-8@mail.com",
+            "phone": "08123456781808",
+            "last_visit": "2025-05-02",
+            "first_visit": "2025-05-02",
+            "total_spent": 59849,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 18-11",
+            "email": "dummy18-11@mail.com",
+            "phone": "08123456781811",
+            "last_visit": "2025-05-02",
+            "first_visit": "2025-05-02",
+            "total_spent": 59801,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 19-1",
+            "email": "dummy19-1@mail.com",
+            "phone": "08123456781901",
+            "last_visit": "2025-05-03",
+            "first_visit": "2025-05-03",
+            "total_spent": 59728,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          },
+          {
+            "name": "Dummy User 27-8",
+            "email": "dummy27-8@mail.com",
+            "phone": "08123456782708",
+            "last_visit": "2025-05-11",
+            "first_visit": "2025-05-11",
+            "total_spent": 59712,
+            "visit_count": 1,
+            "booking_statuses": [
+              "scheduled"
+            ]
+          }
+        ],
+        "location_stats": [
+          {
+            "area": "BANDUNG",
+            "name": "GEGERKALONG",
+            "address": "Jl. Gegerkalong Hilir No.170, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40153",
+            "revenue": 29016400,
+            "bookings": 583,
+            "avg_rating": 0,
+            "location_id": "a0818397-7ab0-435a-bb89-9008d3974c23",
+            "total_hours": 34980,
+            "unique_customers": 577
+          },
+          {
+            "area": "BANDUNG",
+            "name": "KIARA ARTHA",
+            "address": "Jl. Kiara Artha Park No. 1, Bandung",
+            "revenue": 140000,
+            "bookings": 3,
+            "avg_rating": 0,
+            "location_id": "19f95977-3e2e-48ca-989b-dde6ec47e519",
+            "total_hours": 120,
+            "unique_customers": 2
+          }
+        ],
+        "latest_bookings": [
+          {
+            "id": "0661c980-e6e5-4216-b990-8173519acaec",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 50000,
+                "duration": 30,
+                "service_id": "a5b2d4c1-e639-4f87-8756-0b72b3c4134c",
+                "service_name": "Creambath"
+              },
+              {
+                "price": 50000,
+                "duration": 60,
+                "service_id": "21aeedb2-b261-4223-bf7a-6776451739fb",
+                "service_name": "Gentleman's Cut (Capster by Request)"
+              }
+            ],
+            "created_at": "2025-05-15T18:25:38.860072+00:00",
+            "total_price": 50000,
+            "booking_date": "2025-05-16",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "a452e4c2-c92a-4c79-9e99-1cfe1cb99972",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-15T17:52:08.884124+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-16",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "932cbf7a-a10d-48ef-85c5-5aaab1fdcff4",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-15T17:52:08.517463+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-16",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "90454dff-4931-4354-af6f-c449b735fe91",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-15T17:52:08.509277+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-16",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "af77c891-4754-4867-a00b-2bc287d27065",
+            "status": "completed",
+            "services": [
+              {
+                "price": 50000,
+                "duration": 30,
+                "service_id": "2a43d811-69ee-4b50-8015-a3741b9d9026",
+                "service_name": "Cukur Rambut"
+              }
+            ],
+            "created_at": "2025-05-14T20:16:29.477836+00:00",
+            "total_price": 50000,
+            "booking_date": "2025-05-15",
+            "booking_time": "09",
+            "customer_name": "m",
+            "location_name": "KIARA ARTHA",
+            "customer_email": "m@g",
+            "customer_phone": "087",
+            "total_duration": 30
+          },
+          {
+            "id": "0d769454-ff53-4f14-9551-facd3ca7853d",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-13T23:05:12.875484+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-14",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "57823f06-27f1-4eb2-8d40-67f1881216af",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 50000,
+                "duration": 30,
+                "service_id": "21aeedb2-b261-4223-bf7a-6776451739fb",
+                "service_name": "Gentleman's Cut (Capster by Request)"
+              }
+            ],
+            "created_at": "2025-05-13T23:04:49.617154+00:00",
+            "total_price": 50000,
+            "booking_date": "2025-05-14",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "KIARA ARTHA",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 30
+          },
+          {
+            "id": "eb819b0b-c027-4896-b9a6-d602d85b7689",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-13T22:48:41.215593+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-14",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "3920c8bc-7fc7-4576-849e-485e3429aac1",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-13T22:07:34.356066+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-15",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena 2",
+            "location_name": "GEGERKALONG",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          },
+          {
+            "id": "9f91eb2f-41a5-45ca-a46e-1481c898fc08",
+            "status": "scheduled",
+            "services": [
+              {
+                "price": 40000,
+                "duration": 60,
+                "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+                "service_name": "Gentleman's Cut"
+              }
+            ],
+            "created_at": "2025-05-13T21:34:18.107847+00:00",
+            "total_price": 40000,
+            "booking_date": "2025-05-15",
+            "booking_time": "10:00",
+            "customer_name": "Santana Mena",
+            "location_name": "KIARA ARTHA",
+            "customer_email": "santanamnaa8@gmail.com",
+            "customer_phone": "+6282321879086",
+            "total_duration": 60
+          }
+        ],
+        "popular_services": [
+          {
+            "name": "Gentleman's Cut",
+            "revenue": 420000,
+            "bookings": 10,
+            "image_url": "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80",
+            "avg_rating": 0,
+            "service_id": "916d1107-579a-4167-ae4d-384b1e9e8380",
+            "description": "Classic haircut for the modern gentleman",
+            "total_duration": 540,
+            "unique_customers": 1
+          },
+          {
+            "name": "Gentleman's Cut (Capster by Request)",
+            "revenue": 100000,
+            "bookings": 2,
+            "image_url": "https://images.unsplash.com/photo-1622288432450-277d0fef5ed6?auto=format&fit=crop&q=80",
+            "avg_rating": 0,
+            "service_id": "21aeedb2-b261-4223-bf7a-6776451739fb",
+            "description": "Premium haircut with your preferred stylist",
+            "total_duration": 90,
+            "unique_customers": 1
+          },
+          {
+            "name": "Creambath",
+            "revenue": 100000,
+            "bookings": 2,
+            "image_url": "https://images.unsplash.com/photo-1598887142487-3c854d51d1c7",
+            "avg_rating": 0,
+            "service_id": "a5b2d4c1-e639-4f87-8756-0b72b3c4134c",
+            "description": "Deep conditioning treatment for hair",
+            "total_duration": 60,
+            "unique_customers": 2
+          },
+          {
+            "name": "Cukur Rambut",
+            "revenue": 50000,
+            "bookings": 1,
+            "image_url": "",
+            "avg_rating": 0,
+            "service_id": "2a43d811-69ee-4b50-8015-a3741b9d9026",
+            "description": "Cukur rambut pria",
+            "total_duration": 30,
+            "unique_customers": 1
+          }
+        ],
+        "time_distribution": [
+          {
+            "hour": 9,
+            "count": 1
+          },
+          {
+            "hour": 10,
+            "count": 115
+          },
+          {
+            "hour": 11,
+            "count": 48
+          },
+          {
+            "hour": 12,
+            "count": 53
+          },
+          {
+            "hour": 13,
+            "count": 40
+          },
+          {
+            "hour": 14,
+            "count": 56
+          },
+          {
+            "hour": 15,
+            "count": 58
+          },
+          {
+            "hour": 16,
+            "count": 52
+          },
+          {
+            "hour": 17,
+            "count": 60
+          },
+          {
+            "hour": 18,
+            "count": 46
+          },
+          {
+            "hour": 19,
+            "count": 60
+          }
+        ],
+        "seats_availability": [
+          {
+            "location_id": "a0818397-7ab0-435a-bb89-9008d3974c23",
+            "total_seats": 11,
+            "active_seats": 11,
+            "location_name": "GEGERKALONG",
+            "upcoming_bookings": 4,
+            "scheduled_bookings": 4
+          },
+          {
+            "location_id": "19f95977-3e2e-48ca-989b-dde6ec47e519",
+            "total_seats": 5,
+            "active_seats": 5,
+            "location_name": "KIARA ARTHA",
+            "upcoming_bookings": 0,
+            "scheduled_bookings": 0
+          }
+        ],
+        "service_categories": [
+          {
+            "avg_price": 122105.26315789473,
+            "max_price": 360000,
+            "min_price": 40000,
+            "avg_duration": 75,
+            "service_count": 19
+          }
+        ]
+      }
+    }
+  ]
