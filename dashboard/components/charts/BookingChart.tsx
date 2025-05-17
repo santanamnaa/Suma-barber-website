@@ -17,11 +17,11 @@ export function BookingChart({ data = [] }: { data: BookingStats[] }) {
     () =>
       data.map((item) => ({
         ...item,
-        formattedDate: new Date(item.booking_date).toLocaleDateString("id-ID", {
+        formattedDate: new Date(item.day).toLocaleDateString("id-ID", {
           day: "2-digit",
           month: "short",
         }),
-        count: item.total_bookings,
+        count: item.count,
         revenue: item.revenue,
       })),
     [data]

@@ -1,40 +1,29 @@
 // Dashboard data types
 export interface BookingStats {
-  booking_date: string;
-  total_bookings: number;
+  day: string;
+  count: number;
   revenue: number;
-  location: string;
-  popular_service: string;
 }
 
 export interface DashboardData {
-  stats: BookingStats[];
-  topCustomers: Array<{
-    name: string;
-    count: number;
-    total: number;
-  }>;
-  testimonials: Array<{
-    customer_name: string;
-    service: string;
-    rating: number;
-    comment: string;
-    created_at: string;
-  }>;
-  bookingStatusDist: Array<{
-    status: string;
-    count: number;
-  }>;
-  visitorStats: Array<{
-    day: string;
-    count: number;
-  }>;
+  summary: Summary;
+  booking_stats: BookingStats[];
+  location_stats: LocationStat[];
+  popular_services: ServiceStat[];
+  status_dist: StatusStat[];
+  time_distribution: TimeStat[];
+  testimonials: Testimonial[];
+  top_customers: TopCustomer[];
+  latest_bookings: Booking[];
+  seats_availability: SeatAvailability[];
+  service_categories?: ServiceCategory[];
 }
 
 export interface FilterState {
-  range: number;
-  locationId?: string | null;
-  serviceId?: string | null;
+  year: number;
+  month: number;
+  locationId?: string;
+  serviceId?: string;
 }
 
 export type DashboardErrorType = 'API' | 'AUTH' | 'DATA';
@@ -141,18 +130,4 @@ export interface Summary {
   avg_booking_duration?: number;
   avg_booking_value?: number;
   conversion_rate?: number;
-}
-
-export interface DashboardData {
-  summary: Summary;
-  booking_stats: BookingStat[];
-  location_stats: LocationStat[];
-  popular_services: ServiceStat[];
-  status_dist: StatusStat[];
-  time_distribution: TimeStat[];
-  testimonials: Testimonial[];
-  top_customers: TopCustomer[];
-  latest_bookings: Booking[];
-  seats_availability: SeatAvailability[];
-  service_categories?: ServiceCategory[];
 } 

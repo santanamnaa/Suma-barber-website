@@ -14,39 +14,54 @@ interface DashboardFiltersProps {
   filters: FilterState;
   onChange: (filters: FilterState) => void;
   locations: { id: string; name: string }[];
-  services: { id: string; name: string }[];
   loading: boolean;
 }
+
+const monthOptions = [
+  { value: 1, label: "Januari" },
+  { value: 2, label: "Februari" },
+  { value: 3, label: "Maret" },
+  { value: 4, label: "April" },
+  { value: 5, label: "Mei" },
+  { value: 6, label: "Juni" },
+  { value: 7, label: "Juli" },
+  { value: 8, label: "Agustus" },
+  { value: 9, label: "September" },
+  { value: 10, label: "Oktober" },
+  { value: 11, label: "November" },
+  { value: 12, label: "Desember" },
+];
+
+const currentYear = new Date().getFullYear();
+const yearOptions = Array.from({ length: 5 }, (_, i) => ({
+  value: currentYear - i,
+  label: (currentYear - i).toString(),
+}));
 
 export function DashboardFilters({
   filters,
   onChange,
   locations,
-  services,
   loading,
 }: DashboardFiltersProps) {
-  const rangeOptions = [
-    { value: 7, label: "7 hari terakhir" },
-    { value: 14, label: "14 hari terakhir" },
-    { value: 30, label: "30 hari terakhir" },
-    { value: 60, label: "60 hari terakhir" },
-    { value: 90, label: "90 hari terakhir" },
-  ];
+  const handleMonthChange = (value: string) => {
+    onChange({ ...filters, month: parseInt(value, 10) });
+  };
 
-  const handleRangeChange = (value: string) => {
-    onChange({ ...filters, range: parseInt(value) });
+  const handleYearChange = (value: string) => {
+    onChange({ ...filters, year: parseInt(value, 10) });
   };
 
   const handleLocationChange = (value: string) => {
     onChange({ ...filters, locationId: value === "all" ? undefined : value });
   };
 
-  const handleServiceChange = (value: string) => {
-    onChange({ ...filters, serviceId: value === "all" ? undefined : value });
-  };
-
   const resetFilters = () => {
-    onChange({ range: 30, locationId: undefined, serviceId: undefined });
+    onChange({
+      year: currentYear,
+      month: new Date().getMonth() + 1,
+      locationId: undefined,
+    });
   };
 
   return (
@@ -55,16 +70,32 @@ export function DashboardFilters({
         <div className="text-sm font-medium">Filter Dashboard</div>
         <div className="flex flex-wrap gap-2 w-full md:w-auto">
           <Select
-            value={filters.range.toString()}
-            onValueChange={handleRangeChange}
+            value={filters.month.toString()}
+            onValueChange={handleMonthChange}
             disabled={loading}
           >
-            <SelectTrigger className="h-9 w-[180px]">
+            <SelectTrigger className="h-9 w-[140px]">
               <Calendar className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Pilih Periode" />
+              <SelectValue placeholder="Pilih Bulan" />
             </SelectTrigger>
             <SelectContent>
-              {rangeOptions.map((option) => (
+              {monthOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value.toString()}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select
+            value={filters.year.toString()}
+            onValueChange={handleYearChange}
+            disabled={loading}
+          >
+            <SelectTrigger className="h-9 w-[120px]">
+              <SelectValue placeholder="Pilih Tahun" />
+            </SelectTrigger>
+            <SelectContent>
+              {yearOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value.toString()}>
                   {option.label}
                 </SelectItem>
@@ -84,23 +115,6 @@ export function DashboardFilters({
               {locations.map((location) => (
                 <SelectItem key={location.id} value={location.id}>
                   {location.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select
-            value={filters.serviceId || "all"}
-            onValueChange={handleServiceChange}
-            disabled={loading || services.length === 0}
-          >
-            <SelectTrigger className="h-9 w-[180px]">
-              <SelectValue placeholder="Pilih Layanan" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Semua Layanan</SelectItem>
-              {services.map((service) => (
-                <SelectItem key={service.id} value={service.id}>
-                  {service.name}
                 </SelectItem>
               ))}
             </SelectContent>

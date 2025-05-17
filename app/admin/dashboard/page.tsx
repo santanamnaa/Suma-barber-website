@@ -115,24 +115,22 @@ const timeAgo = (date: string | number | Date): string => {
 
 export default function AdminDashboard() {
   // State
-  const [filters, setFilters] = useState<FilterState>({ range: 30, locationId: undefined, serviceId: undefined });
+  const today = new Date();
+  const [filters, setFilters] = useState<FilterState>({ year: today.getFullYear(), month: today.getMonth() + 1, locationId: undefined });
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [locations, setLocations] = useState<{ id: string; name: string }[]>([]);
-  const [services, setServices] = useState<{ id: string; name: string }[]>([]);
   const [activeTab, setActiveTab] = useState("overview");
 
-  // Fetch filters (locations, services)
+  // Fetch filters (locations)
   useEffect(() => {
     async function fetchFilters() {
       try {
         const locs = await fetchLocationsWithDetails();
         setLocations(locs.map(l => ({ id: l.id, name: l.name })));
-        const svcs = await fetchServicesWithDetails();
-        setServices(svcs.map(s => ({ id: s.id, name: s.name })));
       } catch (err) {
-        setError("Gagal mengambil data lokasi/layanan.");
+        setError("Gagal mengambil data lokasi.");
       }
     }
     fetchFilters();
@@ -141,7 +139,8 @@ export default function AdminDashboard() {
   // Fetch dashboard data
   useEffect(() => {
     setLoading(true);
-    getDashboardData(filters.range)
+    console.log({ year: filters.year, month: filters.month, locationId: filters.locationId });
+    getDashboardData(filters.year, filters.month, filters.locationId)
       .then(data => {
         setDashboardData(data);
         console.log('RAW DATA FROM SUPABASE', data);
@@ -155,7 +154,7 @@ export default function AdminDashboard() {
 
   // Real-time sync
   useEffect(() => {
-    const cleanup = initRealtimeUpdates(() => getDashboardData(filters.range).then(setDashboardData));
+    const cleanup = initRealtimeUpdates(() => getDashboardData(filters.year, filters.month, filters.locationId).then(setDashboardData));
     return () => { cleanup && cleanup(); };
   }, [filters]);
 
@@ -192,11 +191,18 @@ export default function AdminDashboard() {
   }, [locationStats, filters.locationId]);
 
   const filteredServiceStats = useMemo(() => {
-    if (filters.serviceId) {
-      return popularServices.filter((svc: any) => svc.service_id === filters.serviceId);
+    if (filters.locationId) {
+      return popularServices.filter((svc: any) => svc.location_id === filters.locationId);
     }
     return popularServices;
-  }, [popularServices, filters.serviceId]);
+  }, [popularServices, filters.locationId]);
+
+  // Replace all instances of 'filters.range' with a formatted string for the selected month/year
+  const monthNames = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+  ];
+  const selectedMonthYear = `${monthNames[filters.month - 1]} ${filters.year}`;
 
   // --- Render ---
   return (
@@ -211,7 +217,7 @@ export default function AdminDashboard() {
           <Button variant="outline" size="sm" onClick={() => window.print()}>
             <span className="mr-2">🖨️</span> Print
           </Button>
-          <Button variant="outline" size="sm" onClick={() => getDashboardData(filters.range).then(setDashboardData)}>
+          <Button variant="outline" size="sm" onClick={() => { setLoading(true); getDashboardData(filters.year, filters.month, filters.locationId).then(setDashboardData).finally(() => setLoading(false)); }}>
             <span className="mr-2">🔄</span> Refresh
           </Button>
         </div>
@@ -228,9 +234,8 @@ export default function AdminDashboard() {
       {/* Filter Bar */}
       <DashboardFilters
         filters={filters}
-        onChange={(f: FilterState) => setFilters(f)}
+        onChange={(f: FilterState) => setFilters({ ...f, locationId: f.locationId || undefined })}
         locations={locations}
-        services={services}
         loading={loading}
       />
 
@@ -252,13 +257,13 @@ export default function AdminDashboard() {
                 <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 <div>
                   <CardTitle className="text-sm font-medium">Total Booking</CardTitle>
-                  <CardDescription className="text-xs">dalam {filters.range} hari terakhir</CardDescription>
+                  <CardDescription className="text-xs">pada {selectedMonthYear}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">{summary.total_bookings || 0}</div>
                 <p className="text-xs text-gray-500 mt-1">
-                  Rata-rata {Math.round((summary.total_bookings || 0) / filters.range)} per hari
+                  Rata-rata {Math.round((summary.total_bookings || 0) / 30)} per hari
                 </p>
               </CardContent>
             </Card>
@@ -268,13 +273,13 @@ export default function AdminDashboard() {
                 <DollarSign className="h-5 w-5 text-green-600 dark:text-green-400" />
                 <div>
                   <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                  <CardDescription className="text-xs">dalam {filters.range} hari terakhir</CardDescription>
+                  <CardDescription className="text-xs">pada {selectedMonthYear}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">{formatStats.currency(summary.total_revenue || 0)}</div>
                 <p className="text-xs text-gray-500 mt-1">
-                  Rata-rata {formatStats.currency((summary.total_revenue || 0) / filters.range)} per hari
+                  Rata-rata {formatStats.currency((summary.total_revenue || 0) / 30)} per hari
                 </p>
               </CardContent>
             </Card>
@@ -284,7 +289,7 @@ export default function AdminDashboard() {
                 <Users className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                 <div>
                   <CardTitle className="text-sm font-medium">Total Pelanggan</CardTitle>
-                  <CardDescription className="text-xs">dalam {filters.range} hari terakhir</CardDescription>
+                  <CardDescription className="text-xs">pada {selectedMonthYear}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>
@@ -544,7 +549,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Detail Reservasi</CardTitle>
-              <CardDescription>Daftar lengkap reservasi dalam {filters.range} hari terakhir</CardDescription>
+              <CardDescription>Daftar lengkap reservasi pada {selectedMonthYear}</CardDescription>
             </CardHeader>
             <CardContent>
               {loading ? (
@@ -614,7 +619,7 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">{summary.total_customers || 0}</div>
-                <p className="text-xs text-gray-500 mt-1">dalam {filters.range} hari terakhir</p>
+                <p className="text-xs text-gray-500 mt-1">pada {selectedMonthYear}</p>
               </CardContent>
             </Card>
             
