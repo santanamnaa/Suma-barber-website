@@ -206,7 +206,7 @@ export default function AdminDashboard() {
 
   // --- Render ---
   return (
-    <div className="max-w-7xl mx-auto py-6 space-y-8 dark:bg-zinc-900 dark:text-zinc-100 min-h-screen">
+    <div className="max-w-7xl mx-auto py-6 space-y-8  dark:text-zinc-100 min-h-screen">
       {/* Page Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <div>
@@ -214,11 +214,45 @@ export default function AdminDashboard() {
           <p className="text-gray-500 dark:text-gray-400">Pantau kinerja bisnis secara real-time</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => window.print()}>
-            <span className="mr-2">🖨️</span> Print
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => { setLoading(true); getDashboardData(filters.year, filters.month, filters.locationId).then(setDashboardData).finally(() => setLoading(false)); }}>
-            <span className="mr-2">🔄</span> Refresh
+          <Button 
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+            onClick={async () => {
+              try {
+                setLoading(true);
+                const data = await getDashboardData(filters.year, filters.month, filters.locationId);
+                setDashboardData(data);
+              } catch (error) {
+                console.error('Error refreshing dashboard:', error);
+                setError('Failed to refresh dashboard data');
+              } finally {
+                setLoading(false);
+              }
+            }}
+            disabled={loading}
+          >
+            <svg
+              className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            {loading ? 'Refreshing...' : 'Refresh Data'}
           </Button>
         </div>
       </div>
