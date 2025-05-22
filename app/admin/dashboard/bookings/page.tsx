@@ -902,7 +902,7 @@ export default function BookingsAdminPage() {
           ) : (
             <div className="overflow-x-auto w-full">
               <Table className="min-w-[700px] w-full text-sm">
-                <TableHeader className="bg-gray-50">
+                <TableHeader >
                   <TableRow>
                     <TableHead>Nama</TableHead>
                     <TableHead>Lokasi</TableHead>
@@ -916,7 +916,7 @@ export default function BookingsAdminPage() {
                 </TableHeader>
                 <TableBody>
                   {bookings.map((b) => (
-                    <TableRow key={b.id} className="hover:bg-gray-50">
+                    <TableRow key={b.id} >
                       <TableCell className="whitespace-nowrap max-w-[120px] overflow-x-auto">
                         <button
                           onClick={() => openCustomerDetail(b)}
