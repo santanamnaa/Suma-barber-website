@@ -78,19 +78,19 @@ export default function Home() {
 
   const featuredGallery = [
     {
-      url: '/images/galery/galery-1.webp',
-      caption: '',
-    },
-    {
-      url: '/images/galery/galery-2.webp',
-      caption: '',
-    },
-    {
-      url: '/images/galery/galery-3.webp',
-      caption: '',
-    },
-    {
       url: '/images/galery/galery-4.webp',
+      caption: '',
+    },
+    {
+      url: '/images/galery/galery-5.webp',
+      caption: '',
+    },
+    {
+      url: '/images/galery/galery-6.webp',
+      caption: '',
+    },
+    {
+      url: '/images/galery/galery-7.webp',
       caption: '',
     },
   ]

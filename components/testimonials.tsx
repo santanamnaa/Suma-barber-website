@@ -6,187 +6,194 @@ import { Card } from "@/components/ui/card"
 import { Quote } from "lucide-react"
 
 const testimonials = [
-    {
-      name: "Maliki Somma",
-      role: "",
-      image: "/images/testimonials/maliki-somma.webp",
-      content: "Potongan rambutnya detail dan presisi sekali. Pengalaman barbershop terbaik yang pernah saya rasakan!"
-    },
-    {
-      name: "Kevin Faulky",
-      role: "",
-      image: "/images/testimonials/kevin-faulky.webp",
-      content: "Ahli dalam gaya potongan Korea—mereka paham tren masa kini dan hasilnya selalu memuaskan sekali."
-    },
-    {
-      name: "Nadhif Herdian",
-      role: "",
-      image: "/images/testimonials/nadhif-herdian.webp",
-      content: "Perpaduan teknik barbering UK dan Korea menciptakan gaya unik yang sulit ditemukan di tempat lain."
-    },
-    {
-      name: "Rayhan Aldi",
-      role: "",
-      image: "/images/testimonials/rayhan-aldi.webp",
-      content: "Layanan ramah dan suasana santainya bikin nyaman. Potongan rambut selalu sesuai ekspektasi!"
-    },
-    {
-      name: "Santana Mena",
-      role: "",
-      image: "/images/testimonials/santana-mena.webp",
-      content: "Capster-nya profesional dan hasilnya rapi. Saya selalu puas setiap kali berkunjung ke Suma Barber."
-    },
-    {
-      name: "Alex Johnson",
-      role: "Frontend Engineer",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Amazing service! The attention to detail is unmatched. Highly recommend for anyone looking for professional grooming."
-    },
-    {
-      name: "Sophia Martinez",
-      role: "Marketing Specialist",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Suma Barber delivers consistent quality. I always walk out feeling more confident and polished!"
-    },
-    {
-      name: "Ethan Williams",
-      role: "Product Designer",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Professional, friendly, and skillful barbers. The ambiance is relaxing, and the final result is always top-notch."
-    },
-    {
-      name: "Olivia Brown",
-      role: "Entrepreneur",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "The best haircut experience I've ever had! Highly skilled team and beautiful space. Can't wait for my next visit."
-    },
-    {
-      name: "Liam Davis",
-      role: "Software Developer",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Their attention to hair texture and style trends is fantastic. You can tell they genuinely care about their clients."
-    },
-    {
-      name: "Mia Wilson",
-      role: "UX Researcher",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Top-notch experience! From consultation to the final style, everything was done with care and professionalism."
-    },
-    {
-      name: "Noah Anderson",
-      role: "Financial Analyst",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Incredible service! They understand modern trends and personalize the cut according to my face shape."
-    },
-    {
-      name: "Ava Thomas",
-      role: "HR Manager",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "The barbers are welcoming, skilled, and listen carefully to what you want. I always leave looking sharp!"
-    },
-    {
-      name: "William Garcia",
-      role: "Startup Founder",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Exceptional skills and friendly service. They pay attention to the little details that truly make the difference."
-    },
-    {
-      name: "Isabella Moore",
-      role: "Creative Director",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Every visit feels like a refresh. Their precision and artistry keep me coming back."
-    },
-    {
-      name: "Maliki Somma",
-      role: "",
-      image: "/images/testimonials/maliki-somma.jpg",
-      content: "Potongan rambutnya detail dan presisi sekali. Pengalaman barbershop terbaik yang pernah saya rasakan!"
-    },
-    {
-      name: "Kevin Faulky",
-      role: "",
-      image: "/images/testimonials/kevin-faulky.webp",
-      content: "Ahli dalam gaya potongan Korea—mereka paham tren masa kini dan hasilnya selalu memuaskan sekali."
-    },
-    {
-      name: "Nadhif Herdian",
-      role: "",
-      image: "/images/testimonials/nadhif-herdian.jpg",
-      content: "Perpaduan teknik barbering UK dan Korea menciptakan gaya unik yang sulit ditemukan di tempat lain."
-    },
-    {
-      name: "Rayhan Aldi",
-      role: "",
-      image: "/images/testimonials/rayhan-aldi.webp",
-      content: "Layanan ramah dan suasana santainya bikin nyaman. Potongan rambut selalu sesuai ekspektasi!"
-    },
-    {
-      name: "Santana Mena",
-      role: "",
-      image: "/images/testimonials/santana-mena.webp",
-      content: "Capster-nya profesional dan hasilnya rapi. Saya selalu puas setiap kali berkunjung ke Suma Barber."
-    },
-    {
-      name: "Alex Johnson",
-      role: "Frontend Engineer",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Amazing service! The attention to detail is unmatched. Highly recommend for anyone looking for professional grooming."
-    },
-    {
-      name: "Sophia Martinez",
-      role: "Marketing Specialist",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Suma Barber delivers consistent quality. I always walk out feeling more confident and polished!"
-    },
-    {
-      name: "Ethan Williams",
-      role: "Product Designer",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Professional, friendly, and skillful barbers. The ambiance is relaxing, and the final result is always top-notch."
-    },
-    {
-      name: "Olivia Brown",
-      role: "Entrepreneur",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "The best haircut experience I've ever had! Highly skilled team and beautiful space. Can't wait for my next visit."
-    },
-    {
-      name: "Liam Davis",
-      role: "Software Developer",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Their attention to hair texture and style trends is fantastic. You can tell they genuinely care about their clients."
-    },
-    {
-      name: "Mia Wilson",
-      role: "UX Researcher",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Top-notch experience! From consultation to the final style, everything was done with care and professionalism."
-    },
-    {
-      name: "Noah Anderson",
-      role: "Financial Analyst",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Incredible service! They understand modern trends and personalize the cut according to my face shape."
-    },
-    {
-      name: "Ava Thomas",
-      role: "HR Manager",
-      image:"/images/testimonials/default-avatar.webp",
-      content: "The barbers are welcoming, skilled, and listen carefully to what you want. I always leave looking sharp!"
-    },
-    {
-      name: "William Garcia",
-      role: "Startup Founder",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Exceptional skills and friendly service. They pay attention to the little details that truly make the difference."
-    },
-    {
-      name: "Isabella Moore",
-      role: "Creative Director",
-      image: "/images/testimonials/default-avatar.webp",
-      content: "Every visit feels like a refresh. Their precision and artistry keep me coming back."
-    }
-]
+  {
+    name: "Ahmad Fadli",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Gila sih, potongannya rapih banget. Fix langganan ke sini!"
+  },
+  {
+    name: "Rizky Hidayat",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Udah coba banyak tempat, tapi cuma di sini yang ngerti gaya rambut gue."
+  },
+  {
+    name: "Bagas Pratama",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Barbernya santai, tapi hasilnya serius bagus. Stylish abis!"
+  },
+  {
+    name: "Dimas Akbar",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Sumpah nyaman banget tempatnya, bisa sambil ngopi nunggu giliran."
+  },
+  {
+    name: "Fauzan Maulana",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Baru potong langsung pede. Bikin ganteng tuh kerjaannya Suma Barber!"
+  },
+  {
+    name: "Hendra Wijaya",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Capsternya ngerti selera anak muda. Hasilnya mantep, nggak perlu diatur ulang."
+  },
+  {
+    name: "Arief Rahman",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Potong di sini berasa di-upgrade jadi versi terbaik diri sendiri. Mantap!"
+  },
+  {
+    name: "Taufik Ramadhan",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Gaya Korea? UK style? Semua bisa, tinggal duduk dan percaya aja."
+  },
+  {
+    name: "Johan Saputra",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Bikin rambut auto glow up. Nggak lebay, tapi emang keren hasilnya!"
+  },
+  {
+    name: "Imam Setiawan",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Serius, habis potong rambut di sini berasa kayak mau photoshoot."
+  },
+  {
+    name: "Dedi Nugroho",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Harga masih masuk akal tapi kualitas premium. Worth banget."
+  },
+  {
+    name: "Randy Saputra",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Potongannya pas banget sama bentuk muka. Jarang-jarang ada barber bisa gitu."
+  },
+  {
+    name: "Andi Permana",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Bilang 'bebas aja bang', tapi tetap hasilnya keren. Capsternya jago cuy."
+  },
+  {
+    name: "Bayu Susanto",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Suka sama detailnya. Setiap helai rambut berasa dipikirin beneran."
+  },
+  {
+    name: "Galang Mahendra",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Barbernya asik diajak ngobrol, jadi potong rambut nggak kerasa lama."
+  },
+  {
+    name: "Yuda Kurniawan",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Habis potong langsung buka kamera depan terus selfie. Ganteng maksimal!"
+  },
+  {
+    name: "Rama Prasetya",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Nggak perlu repot jelasin, capsternya udah paham maunya kita."
+  },
+  {
+    name: "Ilham Fathurrahman",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Model potongannya awet. Udah seminggu tetep stay keren."
+  },
+  {
+    name: "Reza Aryanto",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Kalau mau tampil clean dan rapi, udah pasti ke sini jalannya."
+  },
+  {
+    name: "Dion Saputra",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Cukup sekali coba langsung nagih. Gaya lo bakal naik level!"
+  },
+  {
+    name: "Bimo Nugraha",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Suka banget vibe tempatnya, anak muda banget, tapi tetap profesional."
+  },
+  {
+    name: "Arkan Ramadhan",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Hasil potongnya selalu konsisten. Gak ada drama potong kebanyakan."
+  },
+  {
+    name: "Iqbal Maulana",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Duduk, relax, pulang udah beda aura. Fix panggilan jodoh makin banyak."
+  },
+  {
+    name: "Fikri Alamsyah",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Suka banget sama cara mereka ngatur poni gue. Nggak lebay, pas!"
+  },
+  {
+    name: "Zaki Rizwan",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Sumpah hasilnya satisfying banget. Kayak habis upgrade karakter di game."
+  },
+  {
+    name: "Rafi Hakim",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Baru pertama ke sini tapi langsung berasa loyal customer. Beda kelas!"
+  },
+  {
+    name: "Vino Wicaksono",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Wangi, bersih, adem, nyaman. Bonusnya: jadi ganteng."
+  },
+  {
+    name: "Jefri Santosa",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Mau potong kayak di TikTok? Di sini tempatnya bro!"
+  },
+  {
+    name: "Yoga Prasetyo",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Rekomendasiin ini ke temen, sekarang jadi rebutan jadwal 😅"
+  },
+  {
+    name: "Akbar Ramli",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Model rambut gue sekarang sering ditanya-tanyain. Thanks Suma!"
+  },
+  {
+    name: "Farhan Lazuardi",
+    role: "",
+    image: "/images/testimonials/default-avatar.webp",
+    content: "Setiap ke sini kayak ritual wajib biar makin kece. Best barber in town!"
+  }
+];
+
 
 export function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null)

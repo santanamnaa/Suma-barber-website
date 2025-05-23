@@ -56,23 +56,23 @@ export default function GalleryPage() {
       caption: ""
     },
     {
-      url: "/images/places/geger-1.PNG",
+      url: "/images/places/geger-1.webp",
       caption: ""
     },
     {
-      url: "/images/places/geger-2.PNG",
+      url: "/images/places/geger-2.webp",
       caption: ""
     },
     {
-      url: "/images/places/geger-3.PNG",
+      url: "/images/places/geger-3.webp",
       caption: ""
     },
     {
-      url: "/images/places/kiara-1.PNG",
+      url: "/images/places/kiara-1.webp",
       caption: ""
     },
     {
-      url: "/images/places/kiara-2.PNG",
+      url: "/images/places/kiara-2.webp",
       caption: ""
     }
   ]
