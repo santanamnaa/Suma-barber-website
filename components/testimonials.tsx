@@ -39,61 +39,61 @@ const testimonials = [
     {
       name: "Alex Johnson",
       role: "Frontend Engineer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Amazing service! The attention to detail is unmatched. Highly recommend for anyone looking for professional grooming."
     },
     {
       name: "Sophia Martinez",
       role: "Marketing Specialist",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Suma Barber delivers consistent quality. I always walk out feeling more confident and polished!"
     },
     {
       name: "Ethan Williams",
       role: "Product Designer",
-      image: "https://randomuser.me/api/portraits/men/76.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Professional, friendly, and skillful barbers. The ambiance is relaxing, and the final result is always top-notch."
     },
     {
       name: "Olivia Brown",
       role: "Entrepreneur",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "The best haircut experience I've ever had! Highly skilled team and beautiful space. Can't wait for my next visit."
     },
     {
       name: "Liam Davis",
       role: "Software Developer",
-      image: "https://randomuser.me/api/portraits/men/85.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Their attention to hair texture and style trends is fantastic. You can tell they genuinely care about their clients."
     },
     {
       name: "Mia Wilson",
       role: "UX Researcher",
-      image: "https://randomuser.me/api/portraits/women/21.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Top-notch experience! From consultation to the final style, everything was done with care and professionalism."
     },
     {
       name: "Noah Anderson",
       role: "Financial Analyst",
-      image: "https://randomuser.me/api/portraits/men/47.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Incredible service! They understand modern trends and personalize the cut according to my face shape."
     },
     {
       name: "Ava Thomas",
       role: "HR Manager",
-      image: "https://randomuser.me/api/portraits/women/53.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "The barbers are welcoming, skilled, and listen carefully to what you want. I always leave looking sharp!"
     },
     {
       name: "William Garcia",
       role: "Startup Founder",
-      image: "https://randomuser.me/api/portraits/men/90.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Exceptional skills and friendly service. They pay attention to the little details that truly make the difference."
     },
     {
       name: "Isabella Moore",
       role: "Creative Director",
-      image: "https://randomuser.me/api/portraits/women/62.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Every visit feels like a refresh. Their precision and artistry keep me coming back."
     },
     {
@@ -129,61 +129,61 @@ const testimonials = [
     {
       name: "Alex Johnson",
       role: "Frontend Engineer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Amazing service! The attention to detail is unmatched. Highly recommend for anyone looking for professional grooming."
     },
     {
       name: "Sophia Martinez",
       role: "Marketing Specialist",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Suma Barber delivers consistent quality. I always walk out feeling more confident and polished!"
     },
     {
       name: "Ethan Williams",
       role: "Product Designer",
-      image: "https://randomuser.me/api/portraits/men/76.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Professional, friendly, and skillful barbers. The ambiance is relaxing, and the final result is always top-notch."
     },
     {
       name: "Olivia Brown",
       role: "Entrepreneur",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "The best haircut experience I've ever had! Highly skilled team and beautiful space. Can't wait for my next visit."
     },
     {
       name: "Liam Davis",
       role: "Software Developer",
-      image: "https://randomuser.me/api/portraits/men/85.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Their attention to hair texture and style trends is fantastic. You can tell they genuinely care about their clients."
     },
     {
       name: "Mia Wilson",
       role: "UX Researcher",
-      image: "https://randomuser.me/api/portraits/women/21.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Top-notch experience! From consultation to the final style, everything was done with care and professionalism."
     },
     {
       name: "Noah Anderson",
       role: "Financial Analyst",
-      image: "https://randomuser.me/api/portraits/men/47.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Incredible service! They understand modern trends and personalize the cut according to my face shape."
     },
     {
       name: "Ava Thomas",
       role: "HR Manager",
-      image: "https://randomuser.me/api/portraits/women/53.jpg",
+      image:"/images/testimonials/default-avatar.webp",
       content: "The barbers are welcoming, skilled, and listen carefully to what you want. I always leave looking sharp!"
     },
     {
       name: "William Garcia",
       role: "Startup Founder",
-      image: "https://randomuser.me/api/portraits/men/90.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Exceptional skills and friendly service. They pay attention to the little details that truly make the difference."
     },
     {
       name: "Isabella Moore",
       role: "Creative Director",
-      image: "https://randomuser.me/api/portraits/women/62.jpg",
+      image: "/images/testimonials/default-avatar.webp",
       content: "Every visit feels like a refresh. Their precision and artistry keep me coming back."
     }
 ]
