@@ -24,7 +24,7 @@ export function HeroSpotlight() {
     >
       {/* Base image */}
       <Image
-        src="/images/places/geger-1.PNG"
+        src="/images/places/geger-1.webp"
         alt="Suma Barber Front"
         fill
         className="object-cover"

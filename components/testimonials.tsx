@@ -9,31 +9,31 @@ const testimonials = [
     {
       name: "Maliki Somma",
       role: "",
-      image: "/images/testimonials/maliki-somma.jpg",
+      image: "/images/testimonials/maliki-somma.webp",
       content: "Potongan rambutnya detail dan presisi sekali. Pengalaman barbershop terbaik yang pernah saya rasakan!"
     },
     {
       name: "Kevin Faulky",
       role: "",
-      image: "/images/testimonials/kevin-faulky.jpeg",
+      image: "/images/testimonials/kevin-faulky.webp",
       content: "Ahli dalam gaya potongan Korea—mereka paham tren masa kini dan hasilnya selalu memuaskan sekali."
     },
     {
       name: "Nadhif Herdian",
       role: "",
-      image: "/images/testimonials/nadhif-herdian.jpg",
+      image: "/images/testimonials/nadhif-herdian.webp",
       content: "Perpaduan teknik barbering UK dan Korea menciptakan gaya unik yang sulit ditemukan di tempat lain."
     },
     {
       name: "Rayhan Aldi",
       role: "",
-      image: "/images/testimonials/rayhan-aldi.jpeg",
+      image: "/images/testimonials/rayhan-aldi.webp",
       content: "Layanan ramah dan suasana santainya bikin nyaman. Potongan rambut selalu sesuai ekspektasi!"
     },
     {
       name: "Santana Mena",
       role: "",
-      image: "/images/testimonials/santana-mena.jpeg",
+      image: "/images/testimonials/santana-mena.webp",
       content: "Capster-nya profesional dan hasilnya rapi. Saya selalu puas setiap kali berkunjung ke Suma Barber."
     },
     {
@@ -105,7 +105,7 @@ const testimonials = [
     {
       name: "Kevin Faulky",
       role: "",
-      image: "/images/testimonials/kevin-faulky.jpeg",
+      image: "/images/testimonials/kevin-faulky.webp",
       content: "Ahli dalam gaya potongan Korea—mereka paham tren masa kini dan hasilnya selalu memuaskan sekali."
     },
     {
@@ -117,13 +117,13 @@ const testimonials = [
     {
       name: "Rayhan Aldi",
       role: "",
-      image: "/images/testimonials/rayhan-aldi.jpeg",
+      image: "/images/testimonials/rayhan-aldi.webp",
       content: "Layanan ramah dan suasana santainya bikin nyaman. Potongan rambut selalu sesuai ekspektasi!"
     },
     {
       name: "Santana Mena",
       role: "",
-      image: "/images/testimonials/santana-mena.jpeg",
+      image: "/images/testimonials/santana-mena.webp",
       content: "Capster-nya profesional dan hasilnya rapi. Saya selalu puas setiap kali berkunjung ke Suma Barber."
     },
     {

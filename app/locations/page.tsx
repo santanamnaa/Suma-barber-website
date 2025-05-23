@@ -23,7 +23,7 @@ const locations: Location[] = [
     id: 'gegerkalong',
     name: 'Suma Barber - Gegerkalong',
     area: 'BANDUNG',
-    images: ['/images/places/geger-1.PNG', '/images/places/geger-2.PNG', '/images/places/geger-3.PNG'],
+    images: ['/images/places/geger-1.webp', '/images/places/geger-2.webp', '/images/places/geger-3.webp'],
     address:
       'Jl. Gegerkalong Hilir No.170, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40153',
     mapUrl: 'https://maps.app.goo.gl/csFqMZym91f82jS78',
@@ -33,7 +33,7 @@ const locations: Location[] = [
     id: 'kiara-artha-park',
     name: 'Suma Barber - Kiara Artha Park',
     area: 'BANDUNG',
-    images: ['/images/places/kiara-1.PNG', '/images/places/kiara-2.PNG'],
+    images: ['/images/places/kiara-1.webp', '/images/places/kiara-2.webp'],
     address: 'Kiara Artha Park, Ruko B22',
     mapUrl: 'https://maps.app.goo.gl/WSM1yxLWjZtkFrxD6',
     status: 'open',

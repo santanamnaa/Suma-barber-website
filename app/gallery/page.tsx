@@ -12,47 +12,47 @@ export default function GalleryPage() {
   
   const gallery = [
     {
-      url: "/images/galery/galery-1.jpg",
+      url: "/images/galery/galery-1.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-2.jpg",
+      url: "/images/galery/galery-2.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-3.jpg",
+      url: "/images/galery/galery-3.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-4.jpg",
+      url: "/images/galery/galery-4.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-5.jpg",
+      url: "/images/galery/galery-5.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-6.jpg",
+      url: "/images/galery/galery-6.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-7.jpg",
+      url: "/images/galery/galery-7.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-8.jpg",
+      url: "/images/galery/galery-8.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-9.jpg",
+      url: "/images/galery/galery-9.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-10.jpg",
+      url: "/images/galery/galery-10.webp",
       caption: ""
     },
     {
-      url: "/images/galery/galery-11.jpg",
+      url: "/images/galery/galery-11.webp",
       caption: ""
     },
     {

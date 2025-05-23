@@ -113,37 +113,6 @@ const DiscoverSectionPage: NextPage<DiscoverPageProps> = ({ title, items }) => (
         </div>
       </div>
     ))}
-
-    <div className="text-center py-12">
-      <Link 
-        href="/services" 
-        className="
-          inline-flex 
-          items-center 
-          px-6 
-          py-3 
-          bg-primary 
-          text-primary-foreground 
-          rounded-xl 
-          hover:bg-primary/90 
-          transition-colors
-          group
-        "
-      >
-        View All Services
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2"
-        >
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </Link>
-    </div>
   </div>
 )
 

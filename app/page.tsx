@@ -21,25 +21,25 @@ export default function Home() {
     {
       slug: 'face-shape',
       title: 'Match by Face Shape',
-      image: '/images/discover/face-shape.jpg',
+      image: '/images/discover/face-shape.webp',
       description: 'Cari potongan rambut terbaik sesuai bentuk wajah Anda.',
     },
     {
       slug: 'hair-type',
       title: 'Match by Hair Type',
-      image: '/images/discover/hair-type.jpg',
+      image: '/images/discover/hair-type.webp',
       description: 'Pilihan cut untuk rambut lurus, keriting, atau bergelombang.',
     },
     {
       slug: 'hairstyle',
       title: 'Modern Hairstyles',
-      image: '/images/discover/hairstyle.jpg',
+      image: '/images/discover/hair-styles.webp',
       description: 'Inspirasi gaya rambut terkini untuk semua suasana.',
     },
     {
       slug: 'maintenance',
       title: 'Care & Maintenance',
-      image: '/images/discover/maintenance.jpg',
+      image: '/images/discover/maintenance.webp',
       description: 'Tips merawat rambut agar selalu sehat dan berkilau.',
     },
   ]
@@ -78,20 +78,20 @@ export default function Home() {
 
   const featuredGallery = [
     {
-      url: '/images/galery/galery-1.jpg',
+      url: '/images/galery/galery-1.webp',
       caption: '',
     },
     {
-      url: '/images/galery/galery-2.jpg',
-      caption: 'Modern Pompadour',
+      url: '/images/galery/galery-2.webp',
+      caption: '',
     },
     {
-      url: '/images/galery/galery-3.jpg',
-      caption: 'Textured Crop',
+      url: '/images/galery/galery-3.webp',
+      caption: '',
     },
     {
-      url: '/images/galery/galery-4.jpg',
-      caption: 'Clean Fade',
+      url: '/images/galery/galery-4.webp',
+      caption: '',
     },
   ]
 
