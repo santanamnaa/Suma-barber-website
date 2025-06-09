@@ -139,4 +139,24 @@ const DiscoverSectionPage: NextPage<DiscoverPageProps> = ({ title, items }) => (
   </div>
 )
 
-export default DiscoverSectionPage
+// Instead, export a valid Next.js page component as default
+const sampleItems: DiscoverItem[] = [
+  {
+    name: "Classic Fade",
+    tip: "A timeless look that suits everyone.",
+    img: "/images/fade.jpg",
+    description: "Perfect for a clean, professional appearance."
+  },
+  {
+    name: "Modern Pompadour",
+    tip: "Add volume and style to your hair.",
+    img: "/images/pompadour.jpg",
+    description: "Great for those who want to stand out."
+  }
+]
+
+const DiscoverPage = () => (
+  <DiscoverSectionPage title="Discover Styles" items={sampleItems} />
+)
+
+export default DiscoverPage
