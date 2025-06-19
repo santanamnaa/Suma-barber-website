@@ -15,8 +15,12 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from '@/components/ui/accordion'
+import { useTheme } from "next-themes";
 
 export default function Home() {
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   const topics = [
     {
       slug: 'face-shape',
@@ -95,48 +99,95 @@ export default function Home() {
     },
   ]
 
+  // Updated Kiara Artha Park services (menu v3)
   const servicesKiara = [
-    { category: "Haircut", items: [
-      { name: "Gentleman's Cut", price: "40K" },
-      { name: "Gentleman's Cut (Capster by Request)", price: "50K" },
-      { name: "Gentleman's Cut + 30 Minutes Full Back Massage (Tuina)", price: "70K" },
-      { name: "Gentleman's Cut + Bekam Kering", price: "80K" },
-      { name: "Gentleman's Cut + Ear Candle", price: "80K" },
-      { name: "Gentleman's Cut (Long Trim)", price: "70K" },
-    ] },
-    { category: "Hairstyling", items: [
-      { name: "Perm + Gentleman's Cut", price: "190K" },
-      { name: "Korean Perm + Gentleman's Cut", price: "320K" },
-      { name: "Down Perm", price: "130K" },
-    ] },
-    { category: "Hair Coloring", items: [
-      { name: "Full Hair Coloring", price: "250K" },
-      { name: "Full Hair Bleach", price: "270K" },
-      { name: "Highlight", price: "290K" },
-      { name: "Polish (Semir)", price: "90K" },
-    ] },
+    {
+      category: "Haircut",
+      items: [
+        { name: "Premium Gentleman's Cut", price: "50K" },
+        { name: "Premium Gentleman's Cut (Long Trim)", price: "90K" },
+        { name: "Creambath", price: "40K" },
+      ],
+    },
+    {
+      category: "Hairstyling",
+      items: [
+        { name: "Perm + Gentleman's Cut", price: "220K" },
+        { name: "Korean Perm + Gentleman's Cut", price: "360K" },
+        { name: "Down Perm", price: "170K" },
+      ],
+    },
+    {
+      category: "Hair Coloring",
+      items: [
+        { name: "Full Hair Coloring", price: "280K" },
+        { name: "Full Hair Bleach", price: "310K" },
+        { name: "Highlight", price: "320K" },
+        { name: "Polish (Semir)", price: "120K" },
+      ],
+    },
   ];
   
+  // Gegerkalong services (UPDATED MENU v4)
   const servicesGegerkalong = [
-    { category: "Haircut", items: [
-      { name: "Gentleman's Cut", price: "45K" },
-      { name: "Gentleman's Cut (Capster by Request)", price: "55K" },
-      { name: "Gentleman's Cut + 30 Minutes Full Back Massage (Tuina)", price: "75K" },
-      { name: "Gentleman's Cut + Bekam Kering", price: "85K" },
-      { name: "Gentleman's Cut + Ear Candle", price: "85K" },
-      { name: "Gentleman's Cut (Long Trim)", price: "75K" },
-    ] },
-    { category: "Hairstyling", items: [
-      { name: "Perm + Gentleman's Cut", price: "195K" },
-      { name: "Korean Perm + Gentleman's Cut", price: "325K" },
-      { name: "Down Perm", price: "135K" },
-    ] },
-    { category: "Hair Coloring", items: [
-      { name: "Full Hair Coloring", price: "255K" },
-      { name: "Full Hair Bleach", price: "275K" },
-      { name: "Highlight", price: "295K" },
-      { name: "Polish (Semir)", price: "95K" },
-    ] },
+    {
+      category: "Haircut",
+      items: [
+        { name: "Gentleman's Cut", price: "45K" },
+        { name: "Gentleman's Cut (Capster by Request)", price: "50K" },
+        { name: "Gentleman's Cut + Ion Detox Foot Bath", price: "60K" },
+        { name: "Gentleman's Cut + 30 Minutes Full Body MASSAGE (TUINA)", price: "70K" },
+        { name: "Gentleman's Cut + Bekam Kering", price: "80K" },
+        { name: "Gentleman's Cut + Ear Candle", price: "80K" },
+        { name: "Gentleman's Cut (Long Trim)", price: "70K" },
+      ],
+    },
+    {
+      category: "Hairstyling",
+      items: [
+        { name: "Perm + Gentleman's Cut", price: "190K" },
+        { name: "Korean Perm + Gentleman's Cut", price: "320K" },
+        { name: "Down Perm", price: "130K" },
+      ],
+    },
+    {
+      category: "Hair Coloring",
+      items: [
+        { name: "Full Hair Coloring", price: "250K" },
+        { name: "Full Hair Bleach", price: "270K" },
+        { name: "Highlight", price: "290K" },
+        { name: "Polish (Semir)", price: "90K" },
+      ],
+    },
+  ];
+
+  // Updated Riung Bandung services (menu v2)
+  const servicesRiung = [
+    {
+      category: "Haircut",
+      items: [
+        { name: "Premium Gentleman's Cut (Haircut, Shampoo, Hair Wash, Hair Mask, Warm Towel, Styling)", price: "50K" },
+        { name: "Premium Gentleman's Cut (Long Trim)", price: "90K" },
+        { name: "Creambath", price: "40K" },
+      ],
+    },
+    {
+      category: "Hairstyling",
+      items: [
+        { name: "Perm + Gentleman's Cut", price: "220K" },
+        { name: "Korean Perm + Gentleman's Cut", price: "360K" },
+        { name: "Down Perm", price: "170K" },
+      ],
+    },
+    {
+      category: "Hair Coloring",
+      items: [
+        { name: "Full Hair Coloring", price: "280K" },
+        { name: "Full Hair Bleach", price: "310K" },
+        { name: "Highlight", price: "320K" },
+        { name: "Polish (Semir)", price: "120K" },
+      ],
+    },
   ];
   return (
     <div className="min-h-screen">
@@ -159,12 +210,13 @@ export default function Home() {
       <section className="container mx-auto px-4 py-6 md:py-8">
         <h2 className="text-xl md:text-2xl font-bold mb-6 md:mb-8">A BRIEF INTRO</h2>
         <div className="max-w-3xl text-base md:text-xl leading-relaxed text-muted-foreground dark:text-white">
-          <p>
-            Suma Barber memiliki dua cabang aktif yang berlokasi di{' '}
-            <span className="font-semibold">Kiara Artha Park</span> dan{' '}
-            <span className="font-semibold">Gegerkalong</span>, menghadirkan layanan grooming berkualitas tinggi.
-            Seluruh capster kami telah tersertifikasi secara profesional dan berpengalaman dalam memberikan hasil potongan yang presisi dan memuaskan.
-          </p>
+        <p>
+          Suma Barber memiliki tiga cabang aktif yang berlokasi di{' '}
+          <span className="font-semibold">Kiara Artha Park</span>,{' '}
+          <span className="font-semibold">Gegerkalong</span>, dan{' '}
+          <span className="font-semibold">Riung Bandung</span>, menghadirkan layanan grooming berkualitas tinggi.
+          Seluruh capster kami telah tersertifikasi secara profesional dan berpengalaman dalam memberikan hasil potongan yang presisi dan memuaskan.
+        </p>
           <p className="mt-4 md:mt-6">
             Kami berkomitmen untuk menjadi barbershop yang tidak hanya menghadirkan hasil terbaik,
             tetapi juga menjadi ruang di mana anak muda dapat mengekspresikan gaya rambut sesuai tren masa kini dengan percaya diri.
@@ -240,15 +292,14 @@ export default function Home() {
             Professional grooming services tailored to your style and needs
           </p>
 
-          <div className="grid grid-cols-2 gap-3 md:gap-6">
-            {/* Kiara Location */}
-            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
+            {/* Kiara Artha Park Location */}
+            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
               <div className="bg-black p-3 md:p-4">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-1">KIARA ARTHA PARK</h3>
-                <p className="text-white/70 text-xs md:text-sm">Premium services at competitive prices</p>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1 text-center">KIARA ARTHA PARK</h3>
+                <p className="text-white/70 text-xs md:text-sm text-center">Premium services at competitive prices</p>
               </div>
-              
-              <div className="p-3 md:p-4 space-y-4 md:space-y-6">
+              <div className="p-3 md:p-4 space-y-4 md:space-y-6 flex-1">
                 {servicesKiara.map((serviceGroup, index) => (
                   <div key={index} className="space-y-2 md:space-y-3">
                     <h4 className="text-sm md:text-base font-semibold flex items-center">
@@ -268,9 +319,13 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              
               <div className="px-3 md:px-4 pb-3 md:pb-4">
-                <Button className="w-full bg-black hover:bg-black/80 group text-sm md:text-base" asChild>
+                <Button
+                  className={`w-full group text-sm md:text-base transition-colors
+                    ${currentTheme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-black/80"}
+                  `}
+                  asChild
+                >
                   <Link href="/services">
                     Book Appointment
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
@@ -278,15 +333,13 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            
             {/* Gegerkalong Location */}
-            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
               <div className="bg-black p-3 md:p-4">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-1">GEGERKALONG</h3>
-                <p className="text-white/70 text-xs md:text-sm">Exclusive barbering experience</p>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1 text-center">GEGERKALONG</h3>
+                <p className="text-white/70 text-xs md:text-sm text-center">Excellent grooming in North Bandung</p>
               </div>
-              
-              <div className="p-3 md:p-4 space-y-4 md:space-y-6">
+              <div className="p-3 md:p-4 space-y-4 md:space-y-6 flex-1">
                 {servicesGegerkalong.map((serviceGroup, index) => (
                   <div key={index} className="space-y-2 md:space-y-3">
                     <h4 className="text-sm md:text-base font-semibold flex items-center">
@@ -306,9 +359,53 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              
               <div className="px-3 md:px-4 pb-3 md:pb-4">
-                <Button className="w-full bg-black hover:bg-black/80 group text-sm md:text-base" asChild>
+                <Button
+                  className={`w-full group text-sm md:text-base transition-colors
+                    ${currentTheme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-black/80"}
+                  `}
+                  asChild
+                >
+                  <Link href="/services">
+                    Book Appointment
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            {/* Riung Bandung Location */}
+            <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div className="bg-black p-3 md:p-4">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1 text-center">RIUNG BANDUNG</h3>
+                <p className="text-white/70 text-xs md:text-sm text-center">Affordable grooming, great results</p>
+              </div>
+              <div className="p-3 md:p-4 space-y-4 md:space-y-6 flex-1">
+                {servicesRiung.map((serviceGroup, index) => (
+                  <div key={index} className="space-y-2 md:space-y-3">
+                    <h4 className="text-sm md:text-base font-semibold flex items-center">
+                      {serviceGroup.category === "Haircut" && <Scissors className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category === "Hairstyling" && <Heart className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category === "Hair Coloring" && <Droplet className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
+                      {serviceGroup.category}
+                    </h4>
+                    <div className="space-y-1 md:space-y-2">
+                      {serviceGroup.items.map((item, idx) => (
+                        <div key={idx} className="flex justify-between items-center pb-1 md:pb-2 border-b border-border/50 group">
+                          <span className="text-xs md:text-sm group-hover:text-primary transition-colors">{item.name}</span>
+                          <span className="font-mono text-sm md:text-base font-bold">{item.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="px-3 md:px-4 pb-3 md:pb-4">
+                <Button
+                  className={`w-full group text-sm md:text-base transition-colors
+                    ${currentTheme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-black/80"}
+                  `}
+                  asChild
+                >
                   <Link href="/services">
                     Book Appointment
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
@@ -438,6 +535,7 @@ export default function Home() {
           {[
             { id: '01', name: 'GEGERKALONG', area: 'BANDUNG' },
             { id: '02', name: 'KIARA ARTHA', area: 'BANDUNG' },
+            { id: '03', name: 'RIUNG BANDUNG', area: 'BANDUNG' },
           ].map(loc => (
             <Link
               href={`/locations`}

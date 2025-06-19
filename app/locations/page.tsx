@@ -20,8 +20,8 @@ interface Location {
 
 const locations: Location[] = [
   {
-    id: 'gegerkalong',
-    name: 'Suma Barber - Gegerkalong',
+    id: 'Sukajadi',
+    name: 'Suma Barber - Sukajadi',
     area: 'BANDUNG',
     images: ['/images/places/geger-1.webp', '/images/places/geger-2.webp', '/images/places/geger-3.webp'],
     address:
@@ -158,21 +158,23 @@ export default function LocationsPage() {
           {/* Gegerkalong */}
           <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
             <h3 className="text-xl font-semibold mb-2">
-              Suma Barber - Gegerkalong
+              Suma Barber - Sukajadi
             </h3>
             <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-              Jl. Gegerkalong Hilir No.170, Sukasari, Bandung
+              Jl. Sindang Sirna No.21, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40151
             </p>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.1935418669654!2d107.58765661477415!3d-6.867613695033685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6b943c2c5ff%3A0xee36226526b08d94!2sJl.%20Gegerkalong%20Hilir%20No.170%2C%20Gegerkalong%2C%20Kec.%20Sukasari%2C%20Kota%20Bandung%2C%20Jawa%20Barat%2040153!5e0!3m2!1sen!2sid!4v1645123456789!5m2!1sen!2sid"
-              width="100%"
-              height="250"
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.10216770727!2d107.5921822!3d-6.8783619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e785fd8c53c3%3A0x41a5c94703e85d23!2sSUMA%20Barber!5e0!3m2!1sid!2sid!4v1750343203108!5m2!1sid!2sid"
+              width={600}
+              height={450}
+              style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               className="rounded-lg"
             />
             <a
-              href="https://maps.app.goo.gl/csFqMZym91f82jS78"
+              href="https://maps.app.goo.gl/rybppdkbZ9RSo1Rt9"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
@@ -189,16 +191,18 @@ export default function LocationsPage() {
             <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
               Kiara Artha Park, Ruko B22
             </p>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31691.3383122929!2d107.62923584240186!3d-6.916612108926471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7c984c1214f%3A0xf2ad318f99ff6552!2sKiara%20Artha%20Park!5e0!3m2!1sen!2sid!4v1645123456789!5m2!1sen!2sid"
-              width="100%"
-              height="250"
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d990.1959079082066!2d107.64234876959627!3d-6.916452199567688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e700694dd10b%3A0xdeb58e538de134a8!2sSuma%20Barber%20kiara%20artha!5e0!3m2!1sid!2sid!4v1750343440777!5m2!1sid!2sid"
+              width={600}
+              height={450}
+              style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               className="rounded-lg"
             />
             <a
-              href="https://maps.app.goo.gl/WSM1yxLWjZtkFrxD6"
+              href="https://maps.app.goo.gl/4atazA6BzkhztKJV7"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
@@ -210,15 +214,15 @@ export default function LocationsPage() {
           {/* riung-bandung */}
           <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
             <h3 className="text-xl font-semibold mb-2">
-              Suma Barber - riung-bandung
+              Suma Barber - Riung Bandung
             </h3>
             <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-              Jl. riung-bandung No.1, Bandung
+              Jl. Terusan Saluyu, Bandung
             </p>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d25780.360273701695!2d107.67447739800153!3d-6.952207816063832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwNTcnMDEuNCJTIDEwN8KwNDAnNDUuOSJF!5e0!3m2!1sid!2sid!4v1750336835953!5m2!1sid!2sid"
-              width="100%"
-              height="250"
+              width={600}
+              height={450}
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
