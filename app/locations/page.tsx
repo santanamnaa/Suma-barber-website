@@ -142,8 +142,8 @@ function LocationCard({ location }: { location: Location }) {
 
 export default function LocationsPage() {
   return (
-    <div className="container mx-auto px-4 pt-24">
-      <h1 className="text-4xl font-bold mb-12">OUR LOCATIONS</h1>
+    <div className="container mx-auto px-4 pt-16 sm:pt-20 md:pt-24">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12">OUR LOCATIONS</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {locations.map((loc) => (
@@ -152,32 +152,34 @@ export default function LocationsPage() {
       </div>
 
       {/* Map Section */}
-      <div className="mt-24">
-        <h2 className="text-2xl font-bold mb-8">FIND US HERE</h2>
-        <div className="grid md:grid-cols-2 gap-10">
+      <div className="mt-16 sm:mt-24">
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">FIND US HERE</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
           {/* Gegerkalong */}
           <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">
               Suma Barber - Sukajadi
             </h3>
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mb-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               Jl. Sindang Sirna No.21, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40151
             </p>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.10216770727!2d107.5921822!3d-6.8783619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e785fd8c53c3%3A0x41a5c94703e85d23!2sSUMA%20Barber!5e0!3m2!1sid!2sid!4v1750343203108!5m2!1sid!2sid"
-              width={600}
-              height={450}
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="rounded-lg"
-            />
+            <div className="aspect-[4/3] w-full mb-2">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.10216770727!2d107.5921822!3d-6.8783619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e785fd8c53c3%3A0x41a5c94703e85d23!2sSUMA%20Barber!5e0!3m2!1sid!2sid!4v1750343203108!5m2!1sid!2sid"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg w-full h-64 md:h-[450px]"
+              />
+            </div>
             <a
               href="https://maps.app.goo.gl/rybppdkbZ9RSo1Rt9"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              className="inline-block mt-2 sm:mt-4 text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
               Lihat di Google Maps
             </a>
@@ -185,27 +187,29 @@ export default function LocationsPage() {
 
           {/* Kiara Artha */}
           <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">
               Suma Barber - Kiara Artha
             </h3>
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mb-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               Kiara Artha Park, Ruko B22
             </p>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d990.1959079082066!2d107.64234876959627!3d-6.916452199567688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e700694dd10b%3A0xdeb58e538de134a8!2sSuma%20Barber%20kiara%20artha!5e0!3m2!1sid!2sid!4v1750343440777!5m2!1sid!2sid"
-              width={600}
-              height={450}
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="rounded-lg"
-            />
+            <div className="aspect-[4/3] w-full mb-2">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d990.1959079082066!2d107.64234876959627!3d-6.916452199567688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e700694dd10b%3A0xdeb58e538de134a8!2sSuma%20Barber%20kiara%20artha!5e0!3m2!1sid!2sid!4v1750343440777!5m2!1sid!2sid"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg w-full h-64 md:h-[450px]"
+              />
+            </div>
             <a
               href="https://maps.app.goo.gl/4atazA6BzkhztKJV7"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              className="inline-block mt-2 sm:mt-4 text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
               Lihat di Google Maps
             </a>
@@ -213,27 +217,29 @@ export default function LocationsPage() {
 
           {/* riung-bandung */}
           <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">
               Suma Barber - Riung Bandung
             </h3>
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mb-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               Jl. Terusan Saluyu, Bandung
             </p>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d25780.360273701695!2d107.67447739800153!3d-6.952207816063832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwNTcnMDEuNCJTIDEwN8KwNDAnNDUuOSJF!5e0!3m2!1sid!2sid!4v1750336835953!5m2!1sid!2sid"
-              width={600}
-              height={450}
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="rounded-lg"
-            />
+            <div className="aspect-[4/3] w-full mb-2">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d25780.360273701695!2d107.67447739800153!3d-6.952207816063832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwNTcnMDEuNCJTIDEwN8KwNDAnNDUuOSJF!5e0!3m2!1sid!2sid!4v1750336835953!5m2!1sid!2sid"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg w-full h-64 md:h-[450px]"
+              />
+            </div>
             <a
               href="https://maps.app.goo.gl/q25gHLkgRmrs778JA?g_st=iw"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              className="inline-block mt-2 sm:mt-4 text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
               Lihat di Google Maps
             </a>
