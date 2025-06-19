@@ -18,7 +18,7 @@ export function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             <Link href="/" className="text-sm md:text-base hover:text-primary transition-colors">HOME</Link>
-            <Link href="/services" className="text-sm md:text-base hover:text-primary transition-colors">BOOKING</Link>
+            <Link href="/maintenance" className="text-sm md:text-base hover:text-primary transition-colors">BOOKING</Link>
             <Link href="/locations" className="text-sm md:text-base hover:text-primary transition-colors">LOCATIONS</Link>
             <Link href="/work-with-us" className="text-sm md:text-base hover:text-primary transition-colors">WORK WITH US</Link>
           </div>
@@ -54,7 +54,7 @@ export function Navbar() {
                 HOME
               </Link>
               <Link
-                href="/services"
+                href="/maintenance"
                 className="text-sm py-2 hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >

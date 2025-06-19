@@ -38,6 +38,15 @@ const locations: Location[] = [
     mapUrl: 'https://maps.app.goo.gl/WSM1yxLWjZtkFrxD6',
     status: 'open',
   },
+  {
+    id: 'riung-bandung',
+    name: 'Suma Barber - Riung Bandung',
+    area: 'BANDUNG',
+    images: ['/images/places/riung1.jpeg', '/images/places/riung2.jpeg', '/images/places/riung3.jpeg', '/images/places/riung4.jpeg'],
+    address: 'Jl. Riung Bandung',
+    mapUrl: 'https://maps.app.goo.gl/q25gHLkgRmrs778JA?g_st=iw',
+    status: 'open',
+  },
 ]
 
 function LocationCard({ location }: { location: Location }) {
@@ -190,6 +199,34 @@ export default function LocationsPage() {
             />
             <a
               href="https://maps.app.goo.gl/WSM1yxLWjZtkFrxD6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Lihat di Google Maps
+            </a>
+          </div>
+
+          {/* riung-bandung */}
+          <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
+            <h3 className="text-xl font-semibold mb-2">
+              Suma Barber - riung-bandung
+            </h3>
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+              Jl. riung-bandung No.1, Bandung
+            </p>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d25780.360273701695!2d107.67447739800153!3d-6.952207816063832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwNTcnMDEuNCJTIDEwN8KwNDAnNDUuOSJF!5e0!3m2!1sid!2sid!4v1750336835953!5m2!1sid!2sid"
+              width="100%"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="rounded-lg"
+            />
+            <a
+              href="https://maps.app.goo.gl/q25gHLkgRmrs778JA?g_st=iw"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400 hover:underline"
