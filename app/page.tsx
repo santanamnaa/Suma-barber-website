@@ -320,7 +320,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="px-3 md:px-4 pb-3 md:pb-4">
-                <Button
+                {/* <Button
                   className={`w-full group text-sm md:text-base transition-colors
                     ${currentTheme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-black/80"}
                   `}
@@ -330,7 +330,7 @@ export default function Home() {
                     Book Appointment
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
                   </Link>
-                </Button>
+                </Button> */}
               </div>
             </div>
             {/* Gegerkalong Location */}
@@ -360,7 +360,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="px-3 md:px-4 pb-3 md:pb-4">
-                <Button
+                {/* <Button
                   className={`w-full group text-sm md:text-base transition-colors
                     ${currentTheme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-black/80"}
                   `}
@@ -370,7 +370,7 @@ export default function Home() {
                     Book Appointment
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
                   </Link>
-                </Button>
+                </Button> */}
               </div>
             </div>
             {/* Riung Bandung Location */}
@@ -400,7 +400,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="px-3 md:px-4 pb-3 md:pb-4">
-                <Button
+                {/* <Button
                   className={`w-full group text-sm md:text-base transition-colors
                     ${currentTheme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-black/80"}
                   `}
@@ -410,7 +410,7 @@ export default function Home() {
                     Book Appointment
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">→</span>
                   </Link>
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
