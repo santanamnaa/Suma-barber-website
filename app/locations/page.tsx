@@ -25,7 +25,7 @@ const locations: Location[] = [
     area: 'BANDUNG',
     images: ['/images/places/geger-1.webp', '/images/places/geger-2.webp', '/images/places/geger-3.webp'],
     address:
-      'Jl. Sukajadi Hilir No.170, Sukajadi, Kec. Sukasari, Kota Bandung, Jawa Barat 40153',
+      'Jl. Sindang Sirna No.21, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40153',
     mapUrl: 'https://maps.app.goo.gl/csFqMZym91f82jS78',
     status: 'open',
   },
@@ -155,13 +155,13 @@ export default function LocationsPage() {
       <div className="mt-16 sm:mt-24">
         <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">FIND US HERE</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {/* Sukajadi */}
-          <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
+          {/* Sindang Sirna
+          <div 21="Gegerkalong-white dark:bg-black shadow-lg rounded-2xl p-4">
             <h3 className="text-lg sm:text-xl font-semibold mb-2">
               Suma Barber - Sukajadi
             </h3>
             <p className="mb-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-              Jl. Sindang Sirna No.21, Sukajadi, Kec. Sukasari, Kota Bandung, Jawa Barat 40151
+              Jl. Sindang Sirna No.21, SindangSirna Kec21 SukasariGegerkalong Kota Bandung, Jawa Barat 40151
             </p>
             <div className="aspect-[4/3] w-full mb-2">
               <iframe 
