@@ -155,8 +155,8 @@ export default function LocationsPage() {
       <div className="mt-16 sm:mt-24">
         <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">FIND US HERE</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {/* Sindang Sirna
-          <div 21="Gegerkalong-white dark:bg-black shadow-lg rounded-2xl p-4">
+          {/* Sukajadi */}
+          <div className="bg-white dark:bg-black shadow-lg rounded-2xl p-4">
             <h3 className="text-lg sm:text-xl font-semibold mb-2">
               Suma Barber - Sukajadi
             </h3>
