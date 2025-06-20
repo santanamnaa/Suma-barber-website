@@ -128,12 +128,12 @@ export default function Home() {
     },
   ];
   
-  // Gegerkalong services (UPDATED MENU v4)
-  const servicesGegerkalong = [
+  // Sukajadi services (UPDATED MENU v4)
+  const servicesSukajadi = [
     {
       category: "Haircut",
       items: [
-        { name: "Gentleman's Cut", price: "45K" },
+        { name: "Gentleman's Cut", price: "40K" },
         { name: "Gentleman's Cut (Capster by Request)", price: "50K" },
         { name: "Gentleman's Cut + Ion Detox Foot Bath", price: "60K" },
         { name: "Gentleman's Cut + 30 Minutes Full Body MASSAGE (TUINA)", price: "70K" },
@@ -213,7 +213,7 @@ export default function Home() {
         <p>
           Suma Barber memiliki tiga cabang aktif yang berlokasi di{' '}
           <span className="font-semibold">Kiara Artha Park</span>,{' '}
-          <span className="font-semibold">Gegerkalong</span>, dan{' '}
+          <span className="font-semibold">Sukajadi</span>, dan{' '}
           <span className="font-semibold">Riung Bandung</span>, menghadirkan layanan grooming berkualitas tinggi.
           Seluruh capster kami telah tersertifikasi secara profesional dan berpengalaman dalam memberikan hasil potongan yang presisi dan memuaskan.
         </p>
@@ -333,14 +333,14 @@ export default function Home() {
                 </Button> */}
               </div>
             </div>
-            {/* Gegerkalong Location */}
+            {/* Sukajadi Location */}
             <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
               <div className="bg-black p-3 md:p-4">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-1 text-center">GEGERKALONG</h3>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1 text-center">SUKAJADI</h3>
                 <p className="text-white/70 text-xs md:text-sm text-center">Excellent grooming in North Bandung</p>
               </div>
               <div className="p-3 md:p-4 space-y-4 md:space-y-6 flex-1">
-                {servicesGegerkalong.map((serviceGroup, index) => (
+                {servicesSukajadi.map((serviceGroup, index) => (
                   <div key={index} className="space-y-2 md:space-y-3">
                     <h4 className="text-sm md:text-base font-semibold flex items-center">
                       {serviceGroup.category === "Haircut" && <Scissors className="h-4 w-4 md:h-5 md:w-5 mr-2" />}
@@ -533,7 +533,7 @@ export default function Home() {
         </h2>
         <div className="space-y-4 md:space-y-8">
           {[
-            { id: '01', name: 'GEGERKALONG', area: 'BANDUNG' },
+            { id: '01', name: 'Sukajadi', area: 'BANDUNG' },
             { id: '02', name: 'KIARA ARTHA', area: 'BANDUNG' },
             { id: '03', name: 'RIUNG BANDUNG', area: 'BANDUNG' },
           ].map(loc => (
